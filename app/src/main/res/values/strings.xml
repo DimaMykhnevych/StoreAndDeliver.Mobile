@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">StoreAndDeliver</string>
+    <string name="welcome">Welcome</string>
+    <string name="please_enter_your_credentials">Please enter your credentials</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="log_in">Log in</string>
+    <string name="username_required">Username is required</string>
+    <string name="password_required">Password is required</string>
+    <string name="success_login">You are successfully logged in</string>
 </resources>

@@ -1,6 +1,10 @@
 package com.example.storeanddeliver.enums
 
-enum class LoginErrorCode {
-    InvalidUsernameOrPassword,
-    EmailConfirmationRequired,
+import kotlinx.serialization.Serializable
+
+@Serializable
+enum class LoginErrorCode(val value: Int) {
+    InvalidUsernameOrPassword(0),
+    EmailConfirmationRequired(1),
+    Other(100)
 }
