@@ -10,4 +10,8 @@
     <string name="success_login">You are successfully logged in</string>
     <string name="invalid_creds">Username or password is invalid</string>
     <string name="email_confirmation_required">You need to confirm your email</string>
+    <string name="requests_menu_item">Requests</string>
+    <string name="cargo_indicators_menu_item">Cargo indicators</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
