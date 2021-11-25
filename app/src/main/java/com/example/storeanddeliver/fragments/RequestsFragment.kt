@@ -6,9 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.storeanddeliver.R
+import com.example.storeanddeliver.models.CargoRequest
+import com.example.storeanddeliver.models.CargoRequestGroup
 import com.example.storeanddeliver.models.GetOptimizedRequestModel
 import com.example.storeanddeliver.models.Units
 import com.example.storeanddeliver.services.CargoRequestService
+import com.fasterxml.jackson.databind.ObjectMapper
+import kotlinx.serialization.json.Json
 import okhttp3.Call
 import okhttp3.Response
 
@@ -35,11 +39,17 @@ class Requests : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_requests, container, false)
     }
 
     private val onResponse: (Call, Response) -> Unit = { _, response ->
-        val t = response.body!!.string()
+        val responseString = response.body!!.string()
+        parseResponse(responseString)
+    }
+
+    private fun parseResponse(response: String){
+        val kMapper = ObjectMapper()
+        var hashMap = HashMap<String, ArrayList<CargoRequest>>()
+        var res = kMapper.readValue(response, hashMap::class.java)
     }
 }
