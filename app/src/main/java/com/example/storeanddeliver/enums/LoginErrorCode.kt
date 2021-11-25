@@ -9,6 +9,6 @@ enum class LoginErrorCode(val value: Int) {
     Other(100);
 
     companion object {
-        fun fromInt(value: Int) = LoginErrorCode.values().first { it.value == value }
+        fun fromInt(value: Int) = values().first { it.value == value }
     }
 }

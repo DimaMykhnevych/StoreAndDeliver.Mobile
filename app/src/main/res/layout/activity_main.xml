@@ -88,7 +88,7 @@
                 tools:text="Username is required"
                 android:textSize="16sp"
                 android:gravity="center"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:textColor="@color/red"/>
 
             <ProgressBar

@@ -2,14 +2,9 @@ package com.example.storeanddeliver
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MotionEvent
-import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.storeanddeliver.fragments.IndicatorsFragment
 import com.example.storeanddeliver.fragments.Requests
-import com.google.android.material.bottomnavigation.BottomNavigationMenu
-import android.widget.AdapterView.OnItemSelectedListener
-import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity : AppCompatActivity() {
