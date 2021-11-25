@@ -91,6 +91,16 @@
                 android:layout_margin="10dp"
                 android:textColor="@color/red"/>
 
+            <ProgressBar
+                android:layout_weight="1"
+                android:id="@+id/progressBar_cyclic"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:minHeight="40dp"
+                android:minWidth="40dp" />
+
             <Button
                 android:id="@+id/btn_login"
                 android:layout_width="match_parent"

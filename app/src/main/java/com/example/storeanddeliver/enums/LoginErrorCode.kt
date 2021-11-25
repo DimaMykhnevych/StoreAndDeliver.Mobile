@@ -6,5 +6,9 @@ import kotlinx.serialization.Serializable
 enum class LoginErrorCode(val value: Int) {
     InvalidUsernameOrPassword(0),
     EmailConfirmationRequired(1),
-    Other(100)
+    Other(100);
+
+    companion object {
+        fun fromInt(value: Int) = LoginErrorCode.values().first { it.value == value }
+    }
 }

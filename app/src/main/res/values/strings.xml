@@ -8,4 +8,6 @@
     <string name="username_required">Username is required</string>
     <string name="password_required">Password is required</string>
     <string name="success_login">You are successfully logged in</string>
+    <string name="invalid_creds">Username or password is invalid</string>
+    <string name="email_confirmation_required">You need to confirm your email</string>
 </resources>

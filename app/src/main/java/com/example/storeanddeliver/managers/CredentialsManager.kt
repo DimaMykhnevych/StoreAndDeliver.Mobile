@@ -21,6 +21,6 @@ object CredentialsManager {
             registryDate = SimpleDateFormat("dd-MM-yyyy").parse(it.registryDate)
             email = it.email
         }
-        authResponse?.let { token = it.token }
+        authResponse?.token?.let { token = it }
     }
 }

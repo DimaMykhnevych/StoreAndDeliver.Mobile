@@ -1,5 +1,6 @@
 package com.example.storeanddeliver
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -25,13 +26,13 @@ import android.view.View
 
 import android.widget.FrameLayout
 import android.widget.Toast
+import com.example.storeanddeliver.enums.LoginErrorCode
 
 
 class MainActivity : AppCompatActivity(), Callback {
     private var loginResponse: AuthResponseModel? = null
-    private var errorMessage: String? = null
     private lateinit var mBinding: ActivityMainBinding
-
+    private var errorText: String = ""
     private val userName = MutableStateFlow("")
     private val password = MutableStateFlow("")
 
@@ -73,6 +74,7 @@ class MainActivity : AppCompatActivity(), Callback {
     }
 
     override fun onFailure(call: Call, e: IOException) {
+        mBinding.progressBarCyclic.visibility = View.GONE
         e.printStackTrace()
     }
 
@@ -89,16 +91,45 @@ class MainActivity : AppCompatActivity(), Callback {
 
     private fun updateView(text: String) {
         runOnUiThread {
+            mBinding.progressBarCyclic.visibility = View.GONE
+            mBinding.btnLogin.isEnabled = true
             if (loginResponse!!.isAuthorized) {
-                Toast
-                    .makeText(this, getString(R.string.success_login), Toast.LENGTH_LONG)
+                mBinding.txtErrorMessage.text = ""
+                Snackbar
+                    .make(mBinding.root, getString(R.string.success_login), Snackbar.LENGTH_LONG)
                     .show()
+                navigateToNextScreen()
+            } else {
+                onLoginError()
             }
+        }
+    }
+
+    private fun navigateToNextScreen(){
+        val intent = Intent(this, HomeActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun onLoginError() {
+        loginResponse?.let {
+            errorText = when(LoginErrorCode.fromInt(it.loginErrorCode)){
+                LoginErrorCode.InvalidUsernameOrPassword -> {
+                    getString(R.string.invalid_creds)
+                }
+                LoginErrorCode.EmailConfirmationRequired -> {
+                    getString(R.string.email_confirmation_required)
+                }
+                else -> ""
+            }
+            mBinding.txtErrorMessage.text = errorText
         }
     }
 
     private fun onLoginButtonClick() {
         var authService = AuthService()
+        mBinding.progressBarCyclic.visibility = View.VISIBLE
+        mBinding.btnLogin.isEnabled = false
         authService.authorize(
             LoginModel(
                 mBinding.etUserName.text.toString(),
