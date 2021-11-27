@@ -19,7 +19,6 @@ import com.example.storeanddeliver.listAdapters.RequestsAdapter
 import com.example.storeanddeliver.managers.UserSettingsManager
 import com.example.storeanddeliver.models.CargoRequest
 import com.example.storeanddeliver.models.GetOptimizedRequestModel
-import com.example.storeanddeliver.models.Units
 import com.example.storeanddeliver.services.CargoRequestService
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.DeserializationFeature
@@ -68,12 +67,13 @@ class Requests : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         var getModel = GetOptimizedRequestModel(
-            requestType = if(position == 1) 0 else 1,
+            requestType = if (position == 1) 0 else 1,
             units = UserSettingsManager.units,
             currentLanguage = UserSettingsManager.currentLanguage,
             status = requestStatus.value
         )
         requests.clear()
+        setupRequestsRecyclerView()
         binding.progressBarCyclic.isVisible = true
         cargoRequestService.getUserCargoRequests(getModel, onResponse)
     }
@@ -90,10 +90,14 @@ class Requests : Fragment(), AdapterView.OnItemSelectedListener {
     private fun updateView() {
         activity?.runOnUiThread {
             binding.progressBarCyclic.isVisible = false
-            requestsView.apply {
-                layoutManager = LinearLayoutManager(activity)
-                adapter = RequestsAdapter(requests, context)
-            }
+            setupRequestsRecyclerView()
+        }
+    }
+
+    private fun setupRequestsRecyclerView() {
+        requestsView.apply {
+            layoutManager = LinearLayoutManager(activity)
+            adapter = RequestsAdapter(requests, context)
         }
     }
 
