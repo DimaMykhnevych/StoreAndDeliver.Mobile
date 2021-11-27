@@ -10,4 +10,7 @@ data class Address(
     var country: String,
     var city: String,
     var street: String,
+    var requestsFrom: ArrayList<Request>?,
+    var requestsTo: ArrayList<Request>?,
+    var store: Store?
 )

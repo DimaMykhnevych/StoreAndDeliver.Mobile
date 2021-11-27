@@ -9,6 +9,6 @@ data class Store(
     var maxCargoVolume: Double,
     var currentOccupiedVolume: Double,
     var addressId: String,
-    var address: Address,
-    var cargoRequests: ArrayList<CargoRequest>
+    var address: Address?,
+    var cargoRequests: ArrayList<CargoRequest>?
 )

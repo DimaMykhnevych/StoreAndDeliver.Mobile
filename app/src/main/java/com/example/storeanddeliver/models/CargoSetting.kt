@@ -9,6 +9,6 @@ data class CargoSetting(
     var maxValue: Double,
     var cargoId: String,
     var environmentSettingId: String,
-    var cargo: Cargo,
-    var environmentSetting: EnvironmentSetting
+    var cargo: Cargo?,
+    var environmentSetting: EnvironmentSetting?
 )

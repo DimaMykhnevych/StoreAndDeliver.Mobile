@@ -11,5 +11,6 @@ data class Cargo(
     var length: Double,
     var width: Double,
     var height: Double,
-    var cargoSettings: ArrayList<CargoSetting>,
+    var cargoSettings: ArrayList<CargoSetting>?,
+    var cargoRequests: ArrayList<CargoRequest>?
 )

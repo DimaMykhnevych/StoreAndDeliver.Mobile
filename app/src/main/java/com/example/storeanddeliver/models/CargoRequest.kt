@@ -9,7 +9,7 @@ data class CargoRequest(
     var cargoId: String,
     var requestId: String,
     var storeId: String,
-    var cargo: Cargo,
-    var request: Request,
-    var store: Store,
+    var cargo: Cargo?,
+    var request: Request?,
+    var store: Store?,
 )
