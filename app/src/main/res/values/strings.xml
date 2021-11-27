@@ -12,6 +12,15 @@
     <string name="email_confirmation_required">You need to confirm your email</string>
     <string name="requests_menu_item">Requests</string>
     <string name="cargo_indicators_menu_item">Cargo indicators</string>
+    <string name="request_from">Request from %1$s</string>
+    <string name="deliver_by">Deliver the cargo by %1$s</string>
+    <string name="store_cargo_from">Store cargo from date %1$s</string>
+    <string name="store_cargo_to">Store cargo by date %1$s</string>
+    <string-array name="request_type_array">
+        <item>Deliver</item>
+        <item>Store</item>
+    </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="request_type">Request type:</string>
 </resources>
