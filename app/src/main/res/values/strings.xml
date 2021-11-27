@@ -16,6 +16,8 @@
     <string name="deliver_by">Deliver the cargo by %1$s</string>
     <string name="store_cargo_from">Store cargo from date %1$s</string>
     <string name="store_cargo_to">Store cargo by date %1$s</string>
+    <string name="address_format">%1$s, %2$s, %3$s</string>
+    <string name="total_price">Total price: %1$s</string>
     <string-array name="request_type_array">
         <item>Deliver</item>
         <item>Store</item>
@@ -23,4 +25,21 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="request_type">Request type:</string>
+    <string name="from_address">From Address</string>
+    <string name="to_address">To Address</string>
+    <string name="cargo">Cargo</string>
+    <string name="show_cargo_info">Show cargo info</string>
+    <string name="show_cargo_notes">Show cargo notes</string>
+    <!--STATUSES-->
+    <string name="status_pending">Pending</string>
+    <string name="status_active">In Progress</string>
+    <string name="status_completed">Completed</string>
+    <!--STATUSES-->
+
+    <!--CARGO INFO-->
+    <string name="cargo_description">Description: %1$s</string>
+    <string name="cargo_status">Status: %1$s</string>
+    <string name="cargo_amount">Amount: %1$d</string>
+    <!--CARGO INFO-->
+
 </resources>
