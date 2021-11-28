@@ -16,6 +16,7 @@ import com.example.storeanddeliver.databinding.FragmentRequestsBinding
 import com.example.storeanddeliver.enums.RequestStatus
 import com.example.storeanddeliver.enums.RequestType
 import com.example.storeanddeliver.listAdapters.RequestsAdapter
+import com.example.storeanddeliver.listeners.RequestStatusSpinnerListener
 import com.example.storeanddeliver.managers.UserSettingsManager
 import com.example.storeanddeliver.models.CargoRequest
 import com.example.storeanddeliver.models.GetOptimizedRequestModel
@@ -36,6 +37,7 @@ class Requests : Fragment(), AdapterView.OnItemSelectedListener {
     private val binding get() = _binding!!
     private lateinit var requestsView: RecyclerView
     private lateinit var requestTypesSpinner: Spinner
+    private lateinit var requestStatusSpinner: Spinner
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +58,9 @@ class Requests : Fragment(), AdapterView.OnItemSelectedListener {
         binding.progressBarCyclic.isVisible = true
         requestsView = binding.requestsView
         requestTypesSpinner = binding.requestTypeSpinner
+        requestStatusSpinner = binding.requestStatusSpinner
         configureRequestTypeSpinner()
+        configureRequestStatusSpinner()
         return binding.root
     }
 
@@ -66,8 +70,27 @@ class Requests : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        requestType = if (position == 1) RequestType.fromInt(0) else RequestType.fromInt(1)
+        updateRequestsList()
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+    }
+
+    private val onRequestStatusSelected: (AdapterView<*>?, View?, Int, Long) -> Unit =
+        { _, _, position, _ ->
+            requestStatus = when (position) {
+                0 -> RequestStatus.Pending
+                1 -> RequestStatus.InProgress
+                2 -> RequestStatus.Completed
+                else -> RequestStatus.Pending
+            }
+            updateRequestsList()
+        }
+
+    private fun updateRequestsList() {
         var getModel = GetOptimizedRequestModel(
-            requestType = if (position == 1) 0 else 1,
+            requestType = requestType.value,
             units = UserSettingsManager.units,
             currentLanguage = UserSettingsManager.currentLanguage,
             status = requestStatus.value
@@ -75,10 +98,8 @@ class Requests : Fragment(), AdapterView.OnItemSelectedListener {
         requests.clear()
         setupRequestsRecyclerView()
         binding.progressBarCyclic.isVisible = true
+        binding.emptyRequestsText.visibility = View.GONE
         cargoRequestService.getUserCargoRequests(getModel, onResponse)
-    }
-
-    override fun onNothingSelected(parent: AdapterView<*>?) {
     }
 
     private val onResponse: (Call, Response) -> Unit = { _, response ->
@@ -91,6 +112,11 @@ class Requests : Fragment(), AdapterView.OnItemSelectedListener {
         activity?.runOnUiThread {
             binding.progressBarCyclic.isVisible = false
             setupRequestsRecyclerView()
+            if(requests.size == 0){
+                binding.emptyRequestsText.visibility = View.VISIBLE
+            } else{
+                binding.emptyRequestsText.visibility = View.GONE
+            }
         }
     }
 
@@ -111,6 +137,19 @@ class Requests : Fragment(), AdapterView.OnItemSelectedListener {
         cargoGroup?.let { map ->
             requests = map.values.flatMap { it.asIterable() }.toMutableList()
         }
+    }
+
+    private fun configureRequestStatusSpinner() {
+        ArrayAdapter.createFromResource(
+            context!!,
+            R.array.request_status_array,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            requestStatusSpinner.adapter = adapter
+        }
+        requestStatusSpinner.onItemSelectedListener =
+            RequestStatusSpinnerListener(onRequestStatusSelected)
     }
 
     private fun configureRequestTypeSpinner() {
