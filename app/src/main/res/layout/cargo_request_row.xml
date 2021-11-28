@@ -154,10 +154,12 @@
 
 
     <LinearLayout
+        android:id="@+id/cargo_info_block"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:orientation="vertical"
+        android:visibility="visible"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/show_cargo_notes">
 
@@ -214,6 +216,13 @@
                 android:layout_margin="5dp"
                 android:textColor="#000"
                 tools:text="Length: 5" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/height"
@@ -230,6 +239,43 @@
                 android:layout_margin="5dp"
                 android:textColor="#000"
                 tools:text="Width: 2" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/cargo_store_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/store_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:textColor="#000"
+                    tools:text="Store Address: Ukraine, Zvenyhorodka, string" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/security_mode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:textColor="#000"
+                    tools:text="Security mode: Enabled" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 

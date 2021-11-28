@@ -29,17 +29,36 @@
     <string name="to_address">To Address</string>
     <string name="cargo">Cargo</string>
     <string name="show_cargo_info">Show cargo info</string>
+    <string name="hide_cargo_info">Hide cargo info</string>
     <string name="show_cargo_notes">Show cargo notes</string>
     <!--STATUSES-->
     <string name="status_pending">Pending</string>
     <string name="status_active">In Progress</string>
     <string name="status_completed">Completed</string>
     <!--STATUSES-->
-
+    <!--UNITS-->
+    <string name="kg">kg</string>
+    <string name="pounds">lb</string>
+    <string name="metres">m</string>
+    <string name="yards">yd</string>
+    <string name="celsius">°C</string>
+    <string name="kelvin">K</string>
+    <string name="fahrenheit">°F</string>
+    <string name="percentage">%</string>
+    <string name="lux">lx</string>
+    <!--UNITS-->
     <!--CARGO INFO-->
     <string name="cargo_description">Description: %1$s</string>
     <string name="cargo_status">Status: %1$s</string>
     <string name="cargo_amount">Amount: %1$d</string>
+    <string name="cargo_weight">Weight: %1$s</string>
+    <string name="cargo_length">Length: %1$s</string>
+    <string name="cargo_height">Height: %1$s</string>
+    <string name="cargo_width">Width: %1$s</string>
+    <string name="store_address">Store Address: %1$s</string>
+    <string name="security_mode">Security Mode: %1$s</string>
+    <string name="enabled">Enabled</string>
+    <string name="disabled">Disabled</string>
     <!--CARGO INFO-->
 
 </resources>

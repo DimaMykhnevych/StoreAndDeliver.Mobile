@@ -4,11 +4,15 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.storeanddeliver.R
+import com.example.storeanddeliver.enums.LengthUnit
 import com.example.storeanddeliver.enums.RequestStatus
 import com.example.storeanddeliver.enums.RequestType
+import com.example.storeanddeliver.enums.WeightUnit
 import com.example.storeanddeliver.managers.UserSettingsManager
 import com.example.storeanddeliver.models.Address
 import com.example.storeanddeliver.models.CargoRequest
@@ -34,6 +38,15 @@ class RequestsAdapter(
         val cargoDescription: TextView = itemView.findViewById(R.id.cargo_description)
         val requestStatus: TextView = itemView.findViewById(R.id.status)
         val amount: TextView = itemView.findViewById(R.id.amount)
+        val weight: TextView = itemView.findViewById(R.id.weight)
+        val length: TextView = itemView.findViewById(R.id.length)
+        val height: TextView = itemView.findViewById(R.id.height)
+        val width: TextView = itemView.findViewById(R.id.width)
+        val btnShowCargoInfo: Button = itemView.findViewById(R.id.show_cargo_info)
+        val cargoInfoBlock: LinearLayout = itemView.findViewById(R.id.cargo_info_block)
+        val storeAddress: TextView = itemView.findViewById(R.id.store_address)
+        val securityMode: TextView = itemView.findViewById(R.id.security_mode)
+        val cargoStoreInfo: LinearLayout = itemView.findViewById(R.id.cargo_store_info)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -65,22 +78,91 @@ class RequestsAdapter(
         holder.totalPrice.text = getTotalSumText(currentRequest?.totalSum)
 
         // CARGO SECTION
-        val currentCargo = cargoRequests[position].cargo
+        displayCargoInfo(holder, cargoRequests[position])
+        // BUTTONS
+        holder.btnShowCargoInfo.setOnClickListener { onShowCargoInfoBtnClick(holder) }
+    }
+
+    override fun getItemCount(): Int {
+        return cargoRequests.size
+    }
+
+    private fun onShowCargoInfoBtnClick(holder: ViewHolder) {
+        var currentVisibility = holder.cargoInfoBlock.visibility
+        if (currentVisibility == View.VISIBLE) {
+            holder.cargoInfoBlock.visibility = View.GONE
+            holder.btnShowCargoInfo.text = context.getString(R.string.show_cargo_info)
+        } else {
+            holder.cargoInfoBlock.visibility = View.VISIBLE
+            holder.btnShowCargoInfo.text = context.getString(R.string.hide_cargo_info)
+        }
+    }
+
+
+    private fun displayCargoInfo(holder: ViewHolder, cargoRequest: CargoRequest) {
+        val currentCargo = cargoRequest.cargo
         holder.cargoDescription.text =
             context.getString(R.string.cargo_description, currentCargo?.description)
         holder.requestStatus.text = context.getString(
             R.string.cargo_status,
-            getRequestStatusText(cargoRequests[position].status)
+            getRequestStatusText(cargoRequest.status)
         )
         holder.amount.text = context.getString(
             R.string.cargo_amount,
             currentCargo?.amount
         )
-
+        holder.weight.text = getCargoWeightText(currentCargo?.weight)
+        holder.length.text = getCargoDistanceUnitText(
+            currentCargo?.length,
+            R.string.cargo_length,
+        )
+        holder.height.text = getCargoDistanceUnitText(
+            currentCargo?.height,
+            R.string.cargo_height,
+        )
+        holder.width.text = getCargoDistanceUnitText(
+            currentCargo?.width,
+            R.string.cargo_width,
+        )
+        if (cargoRequest.request?.type == RequestType.Store.value) {
+            holder.storeAddress.text = context.getString(
+                R.string.store_address,
+                getStoreAddress(cargoRequest.store?.address)
+            )
+            holder.securityMode.text =
+                getSecurityModeText(cargoRequest.request?.isSecurityModeEnabled)
+        } else {
+            holder.cargoStoreInfo.visibility = View.GONE
+        }
     }
 
-    override fun getItemCount(): Int {
-        return cargoRequests.size
+    private fun getCargoDistanceUnitText(value: Double?, stringId: Int): String {
+        var postfix = when (UserSettingsManager.units.length) {
+            LengthUnit.Meters.value -> context.getString(R.string.metres)
+            LengthUnit.Yards.value -> context.getString(R.string.yards)
+            else -> context.getString(R.string.metres)
+        }
+        var unitString = "${"%.2f".format(value)}$postfix";
+        return context.getString(stringId, unitString)
+    }
+
+    private fun getSecurityModeText(enabled: Boolean?): String {
+        var status: String = context.getString(R.string.enabled)
+        if (!enabled!!) {
+            status = context.getString(R.string.disabled)
+        }
+        return context.getString(R.string.security_mode, status)
+    }
+
+
+    private fun getCargoWeightText(weight: Double?): String {
+        var postfix = when (UserSettingsManager.units.weight) {
+            WeightUnit.Kilograms.value -> context.getString(R.string.kg)
+            WeightUnit.Pounds.value -> context.getString(R.string.pounds)
+            else -> context.getString(R.string.kg)
+        }
+        var weightString = "${"%.2f".format(weight)}$postfix"
+        return context.getString(R.string.cargo_weight, weightString)
     }
 
     private fun getRequestStatusText(status: Int): String {
@@ -98,6 +180,15 @@ class RequestsAdapter(
                 R.string.status_pending
             )
         }
+    }
+
+    private fun getStoreAddress(address: Address?): String {
+        return context.getString(
+            R.string.address_format,
+            address?.country,
+            address?.city,
+            address?.street
+        )
     }
 
     private fun setToAddress(holder: ViewHolder, toAddress: Address?) {
