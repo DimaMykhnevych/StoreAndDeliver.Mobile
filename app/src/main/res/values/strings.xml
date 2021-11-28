@@ -59,6 +59,7 @@
     <string name="security_mode">Security Mode: %1$s</string>
     <string name="enabled">Enabled</string>
     <string name="disabled">Disabled</string>
+    <string name="settings">Settings</string>
     <!--CARGO INFO-->
 
 </resources>

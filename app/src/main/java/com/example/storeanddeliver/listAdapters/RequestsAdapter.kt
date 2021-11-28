@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.storeanddeliver.R
 import com.example.storeanddeliver.enums.LengthUnit
@@ -47,6 +48,7 @@ class RequestsAdapter(
         val storeAddress: TextView = itemView.findViewById(R.id.store_address)
         val securityMode: TextView = itemView.findViewById(R.id.security_mode)
         val cargoStoreInfo: LinearLayout = itemView.findViewById(R.id.cargo_store_info)
+        val settingsView: RecyclerView = itemView.findViewById(R.id.settingsView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -79,12 +81,23 @@ class RequestsAdapter(
 
         // CARGO SECTION
         displayCargoInfo(holder, cargoRequests[position])
+        setupSettingsRecyclerView(holder, position)
         // BUTTONS
         holder.btnShowCargoInfo.setOnClickListener { onShowCargoInfoBtnClick(holder) }
     }
 
     override fun getItemCount(): Int {
         return cargoRequests.size
+    }
+
+    private fun setupSettingsRecyclerView(holder: ViewHolder, position: Int) {
+        holder.settingsView.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = CargoSettingsAdapter(
+                cargoRequests[position].cargo?.cargoSettings?.toMutableList(),
+                context
+            )
+        }
     }
 
     private fun onShowCargoInfoBtnClick(holder: ViewHolder) {
@@ -97,7 +110,6 @@ class RequestsAdapter(
             holder.btnShowCargoInfo.text = context.getString(R.string.hide_cargo_info)
         }
     }
-
 
     private fun displayCargoInfo(holder: ViewHolder, cargoRequest: CargoRequest) {
         val currentCargo = cargoRequest.cargo
@@ -215,7 +227,7 @@ class RequestsAdapter(
             "ru" -> "рублей(rub)"
             else -> "\$ (usd)"
         }
-        var priceString = "$totalSum$postfix"
+        var priceString = "${"%.2f".format(totalSum)}$postfix"
         return context.getString(
             R.string.total_price,
             priceString
