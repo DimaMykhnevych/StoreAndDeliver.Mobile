@@ -51,6 +51,25 @@
     <string name="fahrenheit">°F</string>
     <string name="percentage">%</string>
     <string name="lux">lx</string>
+    <string-array name="weight_units_array">
+        <item>Kilograms</item>
+        <item>Pounds</item>
+    </string-array>
+    <string-array name="length_units_array">
+        <item>Meters</item>
+        <item>Yards</item>
+    </string-array>
+    <string-array name="temperature_units_array">
+        <item>Celsius</item>
+        <item>Fahrenheit</item>
+        <item>Kelvin</item>
+    </string-array>
+    <string-array name="humidity_units_array">
+        <item>Percentage</item>
+    </string-array>
+    <string-array name="luminosity_units_array">
+        <item>Lux</item>
+    </string-array>
     <!--UNITS-->
     <!--CARGO INFO-->
     <string name="cargo_description">Description: %1$s</string>
@@ -68,4 +87,13 @@
     <!--CARGO INFO-->
     <string name="request_status">Request Status: </string>
     <string name="empty_requests">There is no requests with such status</string>
+    <string name="apply_units">Apply</string>
+    <string name="cancel">Cancel</string>
+    <!--UNITS PANEL -->
+    <string name="unit_settings">Unit Settings</string>
+    <string name="length_unit">Length Unit:</string>
+    <string name="weight_unit">Weight Unit:</string>
+    <string name="temperature_unit">Temperature Unit:</string>
+    <string name="humidity_unit">Humidity Unit:</string>
+    <!--UNITS PANEL -->
 </resources>

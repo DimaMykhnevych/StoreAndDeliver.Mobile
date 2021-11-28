@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.storeanddeliver.R
 import com.example.storeanddeliver.databinding.FragmentRequestsBinding
+import com.example.storeanddeliver.dialogs.UnitsDialog
 import com.example.storeanddeliver.enums.RequestStatus
 import com.example.storeanddeliver.enums.RequestType
 import com.example.storeanddeliver.listAdapters.RequestsAdapter
@@ -59,6 +60,7 @@ class Requests : Fragment(), AdapterView.OnItemSelectedListener {
         requestsView = binding.requestsView
         requestTypesSpinner = binding.requestTypeSpinner
         requestStatusSpinner = binding.requestStatusSpinner
+        binding.btnUnitsSettings.setOnClickListener { onUnitSettingsButtonClick() }
         configureRequestTypeSpinner()
         configureRequestStatusSpinner()
         return binding.root
@@ -102,6 +104,15 @@ class Requests : Fragment(), AdapterView.OnItemSelectedListener {
         cargoRequestService.getUserCargoRequests(getModel, onResponse)
     }
 
+    private fun onUnitSettingsButtonClick() {
+        var dialog = UnitsDialog(onUnitsConfigured)
+        dialog.show(fragmentManager!!, "units_settings")
+    }
+
+    private val onUnitsConfigured: () -> Unit = {
+        updateRequestsList()
+    }
+
     private val onResponse: (Call, Response) -> Unit = { _, response ->
         val responseString = response.body!!.string()
         parseResponse(responseString)
@@ -112,9 +123,9 @@ class Requests : Fragment(), AdapterView.OnItemSelectedListener {
         activity?.runOnUiThread {
             binding.progressBarCyclic.isVisible = false
             setupRequestsRecyclerView()
-            if(requests.size == 0){
+            if (requests.size == 0) {
                 binding.emptyRequestsText.visibility = View.VISIBLE
-            } else{
+            } else {
                 binding.emptyRequestsText.visibility = View.GONE
             }
         }
