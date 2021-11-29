@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">StoreAndDeliver</string>
+    <string name="welcome">Доброго дня</string>
+    <string name="please_enter_your_credentials">Введіть пароль та ім\'я</string>
+    <string name="username">Ім\'я користувача</string>
+    <string name="password">Пароль</string>
+    <string name="log_in">Увійти</string>
+    <string name="username_required">Ім\'я обов\'язкове</string>
+    <string name="password_required">Пароль обов\'язковий</string>
+    <string name="success_login">Ви успішно авторизувалися</string>
+    <string name="invalid_creds">Ім\'я або пароль невірні</string>
+    <string name="email_confirmation_required">Підтвердіть свою електрону пошту</string>
+    <string name="requests_menu_item">Заяви</string>
+    <string name="cargo_indicators_menu_item">Показники</string>
+    <string name="request_from">Заява від %1$s</string>
+    <string name="deliver_by">Доставити вантаж до %1$s</string>
+    <string name="store_cargo_from">Зберігати вантаж з %1$s</string>
+    <string name="store_cargo_to">Зберігати вантаж до %1$s</string>
+    <string name="address_format">%1$s, %2$s, %3$s</string>
+    <string name="total_price">Загальна ціна: %1$s</string>
+    <string-array name="request_type_array">
+        <item>Доставка</item>
+        <item>Збереження</item>
+    </string-array>
+    <string-array name="request_status_array">
+        <item>На розгляді</item>
+        <item>Оброблюється</item>
+        <item>Виповнено</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="request_type">Тип заяви:</string>
+    <string name="from_address">Перевезти з</string>
+    <string name="to_address">Адреса доставки</string>
+    <string name="cargo">Вантаж</string>
+    <string name="show_cargo_info">Показати вантаж</string>
+    <string name="hide_cargo_info">Скрити вантаж</string>
+    <string name="show_cargo_notes">Показати нотатки</string>
+    <!--STATUSES-->
+    <string name="status_pending">На розгляді</string>
+    <string name="status_active">Оброблюється</string>
+    <string name="status_completed">Виповнено</string>
+    <!--STATUSES-->
+    <!--UNITS-->
+    <string name="kg">кг</string>
+    <string name="pounds">lb</string>
+    <string name="metres">м</string>
+    <string name="yards">yd</string>
+    <string name="celsius">°C</string>
+    <string name="kelvin">K</string>
+    <string name="fahrenheit">°F</string>
+    <string name="percentage">%</string>
+    <string name="lux">lx</string>
+    <string-array name="weight_units_array">
+        <item>Кілограми</item>
+        <item>Фунти</item>
+    </string-array>
+    <string-array name="length_units_array">
+        <item>Метри</item>
+        <item>Ярди</item>
+    </string-array>
+    <string-array name="temperature_units_array">
+        <item>Цельсій</item>
+        <item>Фаренгейт</item>
+        <item>Кельвін</item>
+    </string-array>
+    <string-array name="humidity_units_array">
+        <item>Відсотки</item>
+    </string-array>
+    <string-array name="luminosity_units_array">
+        <item>Люкс</item>
+    </string-array>
+    <!--UNITS-->
+    <!--CARGO INFO-->
+    <string name="cargo_description">Опис: %1$s</string>
+    <string name="cargo_status">Статус: %1$s</string>
+    <string name="cargo_amount">Кількість: %1$d</string>
+    <string name="cargo_weight">Вага: %1$s</string>
+    <string name="cargo_length">Довжина: %1$s</string>
+    <string name="cargo_height">Висота: %1$s</string>
+    <string name="cargo_width">Ширина: %1$s</string>
+    <string name="store_address">Адреса складу: %1$s</string>
+    <string name="security_mode">Додаткова охорона: %1$s</string>
+    <string name="enabled">Включено</string>
+    <string name="disabled">Не включено</string>
+    <string name="settings">Налаштування</string>
+    <!--CARGO INFO-->
+    <string name="request_status">Статус заяви: </string>
+    <string name="empty_requests">Заяв з таким статусом не знайдено</string>
+    <string name="apply_units">Застосувати</string>
+    <string name="cancel">Скасувати</string>
+    <!--UNITS PANEL -->
+    <string name="unit_settings">Налаштування одиниць вимірювання</string>
+    <string name="length_unit">Довжина:</string>
+    <string name="weight_unit">Вага:</string>
+    <string name="temperature_unit">Температура:</string>
+    <string name="humidity_unit">Вологість:</string>
+    <string name="luminosity_unit">Освітленність:</string>
+    <!--UNITS PANEL -->
+    <string name="choose_language">Обрати мову:</string>
+</resources>

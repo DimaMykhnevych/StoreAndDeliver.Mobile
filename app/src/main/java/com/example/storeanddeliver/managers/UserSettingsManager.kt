@@ -11,4 +11,5 @@ object UserSettingsManager {
         luminosity = 0
     );
     var currentLanguage = "en"
+    var currentLocale = "en"
 }

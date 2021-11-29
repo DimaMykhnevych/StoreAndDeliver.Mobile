@@ -95,5 +95,7 @@
     <string name="weight_unit">Weight Unit:</string>
     <string name="temperature_unit">Temperature Unit:</string>
     <string name="humidity_unit">Humidity Unit:</string>
+    <string name="luminosity_unit">Luminosity Unit:</string>
     <!--UNITS PANEL -->
+    <string name="choose_language">Choose language:</string>
 </resources>

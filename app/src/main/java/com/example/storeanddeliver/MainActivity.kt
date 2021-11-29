@@ -2,31 +2,26 @@ package com.example.storeanddeliver
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.TextView
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doOnTextChanged
+import androidx.lifecycle.lifecycleScope
+import com.example.storeanddeliver.databinding.ActivityMainBinding
+import com.example.storeanddeliver.enums.LoginErrorCode
 import com.example.storeanddeliver.managers.CredentialsManager
 import com.example.storeanddeliver.models.AuthResponseModel
 import com.example.storeanddeliver.models.LoginModel
 import com.example.storeanddeliver.services.AuthService
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
 import java.io.IOException
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collect
-import androidx.core.widget.doOnTextChanged
-import androidx.lifecycle.lifecycleScope
-import com.example.storeanddeliver.databinding.ActivityMainBinding
-import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.launch
-import android.view.Gravity
-import android.view.View
-
-import android.widget.FrameLayout
-import android.widget.Toast
-import com.example.storeanddeliver.enums.LoginErrorCode
 
 
 class MainActivity : AppCompatActivity(), Callback {

@@ -22,11 +22,15 @@ import com.example.storeanddeliver.managers.UserSettingsManager
 import com.example.storeanddeliver.models.CargoRequest
 import com.example.storeanddeliver.models.GetOptimizedRequestModel
 import com.example.storeanddeliver.services.CargoRequestService
+import com.example.storeanddeliver.utils.ContextUtils
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import okhttp3.Call
 import okhttp3.Response
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class Requests : Fragment(), AdapterView.OnItemSelectedListener {
     private var cargoGroup: HashMap<String, ArrayList<CargoRequest>>? = null
