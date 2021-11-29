@@ -242,7 +242,10 @@ class RequestsAdapter(
     }
 
     private fun getDateInNeededFormat(dateString: String?): String {
-        val pattern = "MM/dd/yyyy"
+        var pattern = when (UserSettingsManager.currentLanguage){
+            "en" -> "MM/dd/yyyy"
+            else -> "dd/MM/yyyy"
+        }
         val requestDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH)
             .parse(dateString ?: "")
         return SimpleDateFormat(pattern, Locale.ENGLISH).format(requestDate ?: "")
