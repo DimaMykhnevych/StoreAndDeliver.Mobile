@@ -1,5 +1,6 @@
 package com.example.storeanddeliver.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,9 +14,10 @@ import com.example.storeanddeliver.managers.UserSettingsManager
 import com.example.storeanddeliver.utils.ContextUtils.Companion.setLocale
 
 
-class SettingsFragment : Fragment() {
+class SettingsFragment(onLanguageChange: (() -> Unit)?) : Fragment() {
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
+    private val onLanguageChangeCallback = onLanguageChange
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -33,7 +35,7 @@ class SettingsFragment : Fragment() {
     }
 
     private fun setSelectedLanguage() {
-        when(UserSettingsManager.currentLanguage) {
+        when (UserSettingsManager.currentLanguage) {
             "ua" -> binding.langUa.isChecked = true
             "en" -> binding.langEn.isChecked = true
             "ru" -> binding.langRu.isChecked = true
@@ -46,6 +48,7 @@ class SettingsFragment : Fragment() {
         ft.detach(currentFragment);
         ft.attach(currentFragment);
         ft.commit();
+        onLanguageChangeCallback?.let { it() }
     }
 
     private var radioButtonClickListener =
@@ -60,7 +63,7 @@ class SettingsFragment : Fragment() {
                 }
             }
             UserSettingsManager.currentLanguage = locale
-            if(locale == "uk"){
+            if (locale == "uk") {
                 UserSettingsManager.currentLanguage = "ua"
             }
             setLocale(resources, locale)

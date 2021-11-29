@@ -16,7 +16,7 @@ import java.util.*
 class HomeActivity : AppCompatActivity() {
     private val requestsFragment = Requests()
     private val indicatorsFragment = IndicatorsFragment()
-    private val settingsFragment = SettingsFragment()
+    private val settingsFragment = SettingsFragment(null)
     private var bottomNavigation: BottomNavigationView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
