@@ -46,4 +46,14 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/indicators_header" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/indicatorsView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/indicators_header" />
+
 </androidx.constraintlayout.widget.ConstraintLayout >

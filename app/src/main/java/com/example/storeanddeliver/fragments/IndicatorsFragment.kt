@@ -6,9 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.storeanddeliver.R
 import com.example.storeanddeliver.databinding.FragmentIndicatorsBinding
 import com.example.storeanddeliver.databinding.FragmentRequestsBinding
+import com.example.storeanddeliver.listAdapters.IndicatorsAdapter
+import com.example.storeanddeliver.listAdapters.RequestsAdapter
 import com.example.storeanddeliver.managers.UserSettingsManager
 import com.example.storeanddeliver.models.CargoRequest
 import com.example.storeanddeliver.models.GetCargoSnapshotModel
@@ -25,6 +29,7 @@ class IndicatorsFragment : Fragment() {
     private var cargoSnapshotsService = CargoSnapshotsService()
     private var _binding: FragmentIndicatorsBinding? = null
     private val binding get() = _binding!!
+    private lateinit var indicatorsView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,12 +48,20 @@ class IndicatorsFragment : Fragment() {
         _binding = FragmentIndicatorsBinding.inflate(inflater, container, false)
         binding.progressBarIndicators.isVisible = true
         binding.emptyIndicatorsText.visibility = View.GONE
+        indicatorsView = binding.indicatorsView
         return binding.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun setupIndicatorsRecyclerView() {
+        indicatorsView.apply {
+            layoutManager = LinearLayoutManager(activity)
+            adapter = IndicatorsAdapter(userCargoSnapshots, context)
+        }
     }
 
     private val onResponse: (Call, Response) -> Unit = { _, response ->
@@ -60,7 +73,7 @@ class IndicatorsFragment : Fragment() {
     private fun updateView() {
         activity?.runOnUiThread {
             binding.progressBarIndicators.isVisible = false
-//            setupRequestsRecyclerView()
+            setupIndicatorsRecyclerView()
             if (userCargoSnapshots.size == 0) {
                 binding.emptyIndicatorsText.visibility = View.VISIBLE
             } else {

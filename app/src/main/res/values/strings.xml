@@ -100,4 +100,8 @@
     <string name="choose_language">Choose language:</string>
     <string name="cargo_indicators">Cargo Indicators</string>
     <string name="empty_indicators">You have not active cargo requests to show the cargo indicators</string>
+    <!--CARGO INDICATORS -->
+    <string name="cargo_indicators_header">Cargo: %1$s</string>
+    <!--CARGO INDICATORS -->
+
 </resources>
