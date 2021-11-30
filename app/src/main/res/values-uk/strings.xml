@@ -99,4 +99,6 @@
     <string name="luminosity_unit">Освітленність:</string>
     <!--UNITS PANEL -->
     <string name="choose_language">Обрати мову:</string>
+    <string name="cargo_indicators">Показники вантажів</string>
+    <string name="empty_indicators">На даний час не знайдено жодного показника</string>
 </resources>
