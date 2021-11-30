@@ -102,6 +102,8 @@
     <string name="empty_indicators">You have not active cargo requests to show the cargo indicators</string>
     <!--CARGO INDICATORS -->
     <string name="cargo_indicators_header">Cargo: %1$s</string>
+    <string name="configured_settings"><u>Configured settings</u></string>
+    <string name="cargo_snapshots"><u>Cargo snapshots</u></string>
     <!--CARGO INDICATORS -->
 
 </resources>

@@ -103,6 +103,8 @@
     <string name="empty_indicators">На даний час не знайдено жодного показника</string>
     <!--CARGO INDICATORS -->
     <string name="cargo_indicators_header">Вантаж: %1$s</string>
+    <string name="configured_settings"><u>Зконфігуровані налаштування</u></string>
+    <string name="cargo_snapshots"><u>Поточні показники</u></string>
     <!--CARGO INDICATORS -->
 
 </resources>
