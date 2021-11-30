@@ -25,7 +25,6 @@ class CargoRequestService : BaseHttpService() {
 
         okHttpClient.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                TODO("Not yet implemented")
             }
 
             override fun onResponse(call: Call, response: Response) {

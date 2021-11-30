@@ -6,55 +6,50 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.storeanddeliver.R
+import com.example.storeanddeliver.managers.UserSettingsManager
+import com.example.storeanddeliver.models.CargoRequest
+import com.example.storeanddeliver.models.GetCargoSnapshotModel
+import com.example.storeanddeliver.models.UserCargoSnapshots
+import com.example.storeanddeliver.services.CargoSnapshotsService
+import com.fasterxml.jackson.core.type.TypeReference
+import com.fasterxml.jackson.databind.DeserializationFeature
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import okhttp3.Call
+import okhttp3.Response
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [IndicatorsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class IndicatorsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var userCargoSnapshots:MutableList<UserCargoSnapshots> = mutableListOf()
+    private var cargoSnapshotsService = CargoSnapshotsService()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+        var getModel = GetCargoSnapshotModel(
+            Temperature = UserSettingsManager.units.temperature,
+            Humidity = UserSettingsManager.units.humidity,
+            Luminosity = UserSettingsManager.units.luminosity
+        )
+        cargoSnapshotsService.getUserCargoSnapshots(getModel, onResponse)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_indicators, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment IndicatorsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            IndicatorsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private val onResponse: (Call, Response) -> Unit = { _, response ->
+        val responseString = response.body!!.string()
+        parseResponse(responseString)
+//        updateView()
+    }
+
+    private fun parseResponse(response: String) {
+        val kMapper = jacksonObjectMapper().configure(
+            DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,
+            false
+        )
+        val typeRef = object : TypeReference<ArrayList<UserCargoSnapshots>>() {}
+        userCargoSnapshots = kMapper.readValue(response, typeRef)
     }
 }
