@@ -1,6 +1,5 @@
 package com.example.storeanddeliver.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -44,10 +43,10 @@ class SettingsFragment(onLanguageChange: (() -> Unit)?) : Fragment() {
 
     private fun reloadFragment() {
         var currentFragment = this
-        var ft: FragmentTransaction = activity!!.supportFragmentManager.beginTransaction();
-        ft.detach(currentFragment);
-        ft.attach(currentFragment);
-        ft.commit();
+        var ft: FragmentTransaction = activity!!.supportFragmentManager.beginTransaction()
+        ft.detach(currentFragment)
+        ft.attach(currentFragment)
+        ft.commit()
         onLanguageChangeCallback?.let { it() }
     }
 
