@@ -7,9 +7,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.storeanddeliver.R
+import com.example.storeanddeliver.dialogs.SessionNotesDialog
 import com.example.storeanddeliver.enums.LengthUnit
 import com.example.storeanddeliver.enums.RequestStatus
 import com.example.storeanddeliver.enums.RequestType
@@ -17,15 +20,26 @@ import com.example.storeanddeliver.enums.WeightUnit
 import com.example.storeanddeliver.managers.UserSettingsManager
 import com.example.storeanddeliver.models.Address
 import com.example.storeanddeliver.models.CargoRequest
+import com.example.storeanddeliver.models.CargoSessionNote
+import com.example.storeanddeliver.services.CargoSessionNotesService
+import com.fasterxml.jackson.core.type.TypeReference
+import com.fasterxml.jackson.databind.DeserializationFeature
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import okhttp3.Call
+import okhttp3.Response
 import org.w3c.dom.Text
 import java.text.SimpleDateFormat
 import java.util.*
 
 class RequestsAdapter(
     private val cargoRequests: MutableList<CargoRequest>,
-    private val context: Context
+    private val context: Context,
+    private val fragmentManager: FragmentManager,
+    private val fragmentActivity: FragmentActivity
 ) :
     RecyclerView.Adapter<RequestsAdapter.ViewHolder>() {
+
+    private val cargoSessionNotesService = CargoSessionNotesService()
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val requestDate: TextView = itemView.findViewById(R.id.request_date)
@@ -44,6 +58,7 @@ class RequestsAdapter(
         val height: TextView = itemView.findViewById(R.id.height)
         val width: TextView = itemView.findViewById(R.id.width)
         val btnShowCargoInfo: Button = itemView.findViewById(R.id.show_cargo_info)
+        val btnShowCargoNotes: Button = itemView.findViewById(R.id.show_cargo_notes)
         val cargoInfoBlock: LinearLayout = itemView.findViewById(R.id.cargo_info_block)
         val storeAddress: TextView = itemView.findViewById(R.id.store_address)
         val securityMode: TextView = itemView.findViewById(R.id.security_mode)
@@ -84,6 +99,16 @@ class RequestsAdapter(
         setupSettingsRecyclerView(holder, position)
         // BUTTONS
         holder.btnShowCargoInfo.setOnClickListener { onShowCargoInfoBtnClick(holder) }
+        if(cargoRequests[position].status != RequestStatus.Pending.value) {
+            holder.btnShowCargoNotes.setOnClickListener {
+                onShowCargoNotesBtnClick(
+                    holder,
+                    cargoRequests[position].id
+                )
+            }
+        } else{
+            holder.btnShowCargoNotes.visibility = View.GONE
+        }
     }
 
     override fun getItemCount(): Int {
@@ -97,6 +122,29 @@ class RequestsAdapter(
                 cargoRequests[position].cargo?.cargoSettings?.toMutableList(),
                 context
             )
+        }
+    }
+
+    private fun onShowCargoNotesBtnClick(holder: ViewHolder, currentRequestId: String?) {
+        cargoSessionNotesService.getNotesByCargoRequestId(currentRequestId!!, onCargoNotesResponse)
+    }
+
+    private val onCargoNotesResponse: (Call, Response) -> Unit = { _, response ->
+        val responseString = response.body!!.string()
+        val kMapper = jacksonObjectMapper().configure(
+            DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,
+            false
+        )
+        val typeRef = object : TypeReference<ArrayList<CargoSessionNote>>() {}
+        val cargoNotes = kMapper.readValue(responseString, typeRef)
+        cargoNotes.sortBy { k -> k.noteCreationDate }
+        openNotesDialog(cargoNotes)
+    }
+
+    private fun openNotesDialog(notes: MutableList<CargoSessionNote>) {
+        fragmentActivity.runOnUiThread{
+            var dialog = SessionNotesDialog(notes)
+            dialog.show(fragmentManager, "session_notes_dialog")
         }
     }
 
@@ -242,7 +290,7 @@ class RequestsAdapter(
     }
 
     private fun getDateInNeededFormat(dateString: String?): String {
-        var pattern = when (UserSettingsManager.currentLanguage){
+        var pattern = when (UserSettingsManager.currentLanguage) {
             "en" -> "MM/dd/yyyy"
             else -> "dd/MM/yyyy"
         }

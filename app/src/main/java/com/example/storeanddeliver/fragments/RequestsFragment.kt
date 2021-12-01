@@ -138,7 +138,7 @@ class Requests : Fragment(), AdapterView.OnItemSelectedListener {
     private fun setupRequestsRecyclerView() {
         requestsView.apply {
             layoutManager = LinearLayoutManager(activity)
-            adapter = RequestsAdapter(requests, context)
+            adapter = RequestsAdapter(requests, context, fragmentManager!!, activity!!)
         }
     }
 

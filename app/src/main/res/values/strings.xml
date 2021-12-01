@@ -106,4 +106,10 @@
     <string name="cargo_snapshots"><u>Cargo snapshots</u></string>
     <!--CARGO INDICATORS -->
 
+    <!--NOTES DIALOG -->
+    <string name="notes">Notes</string>
+    <string name="empty_notes">There are no notes</string>
+    <!--NOTES DIALOG -->
+    <string name="close">Close</string>
+
 </resources>

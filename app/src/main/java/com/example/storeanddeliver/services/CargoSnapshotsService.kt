@@ -1,11 +1,8 @@
 package com.example.storeanddeliver.services
 
-import android.net.Uri
 import com.example.storeanddeliver.constants.Constants
 import com.example.storeanddeliver.managers.CredentialsManager
 import com.example.storeanddeliver.models.GetCargoSnapshotModel
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import okhttp3.*
 import java.io.IOException
 import android.net.Uri.Builder

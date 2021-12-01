@@ -107,4 +107,9 @@
     <string name="cargo_snapshots"><u>Поточні показники</u></string>
     <!--CARGO INDICATORS -->
 
+    <!--NOTES DIALOG -->
+    <string name="notes">Нотатки</string>
+    <string name="empty_notes">Нотатки відсутні</string>
+    <!--NOTES DIALOG -->
+    <string name="close">Закрити</string>
 </resources>
