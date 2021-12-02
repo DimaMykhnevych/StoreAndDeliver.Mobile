@@ -4,11 +4,13 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.storeanddeliver.R
+import com.example.storeanddeliver.enums.RequestStatus
 import com.example.storeanddeliver.models.CargoRequest
 
 class CarrierRequestsAdapter(
@@ -21,6 +23,7 @@ class CarrierRequestsAdapter(
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val carrierRequestsView: RecyclerView = itemView.findViewById(R.id.carrierRequestsView)
+        val btnComplete: Button = itemView.findViewById(R.id.btn_complete)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,7 +35,13 @@ class CarrierRequestsAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val keys = cargoRequests.keys.toMutableList()
-        setupCarrierRequestsView(holder, cargoRequests[keys[position]]!!.toMutableList())
+        val currentCargoRequests = cargoRequests[keys[position]]!!.toMutableList()
+        setupCarrierRequestsView(holder, currentCargoRequests)
+        if (currentCargoRequests.isNotEmpty()
+            && currentCargoRequests[0].status != RequestStatus.InProgress.value
+        ) {
+            holder.btnComplete.visibility = View.GONE
+        }
     }
 
     override fun getItemCount(): Int {

@@ -12,11 +12,13 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.storeanddeliver.R
+import com.example.storeanddeliver.constants.Roles
 import com.example.storeanddeliver.dialogs.SessionNotesDialog
 import com.example.storeanddeliver.enums.LengthUnit
 import com.example.storeanddeliver.enums.RequestStatus
 import com.example.storeanddeliver.enums.RequestType
 import com.example.storeanddeliver.enums.WeightUnit
+import com.example.storeanddeliver.managers.CredentialsManager
 import com.example.storeanddeliver.managers.UserSettingsManager
 import com.example.storeanddeliver.models.Address
 import com.example.storeanddeliver.models.CargoRequest
@@ -59,6 +61,7 @@ class RequestsAdapter(
         val width: TextView = itemView.findViewById(R.id.width)
         val btnShowCargoInfo: Button = itemView.findViewById(R.id.show_cargo_info)
         val btnShowCargoNotes: Button = itemView.findViewById(R.id.show_cargo_notes)
+        val btnAddCargoNote: Button = itemView.findViewById(R.id.add_cargo_note)
         val cargoInfoBlock: LinearLayout = itemView.findViewById(R.id.cargo_info_block)
         val storeAddress: TextView = itemView.findViewById(R.id.store_address)
         val securityMode: TextView = itemView.findViewById(R.id.security_mode)
@@ -108,6 +111,9 @@ class RequestsAdapter(
             }
         } else{
             holder.btnShowCargoNotes.visibility = View.GONE
+        }
+        if(CredentialsManager.role != Roles.Carrier) {
+            holder.btnAddCargoNote.visibility = View.GONE
         }
     }
 

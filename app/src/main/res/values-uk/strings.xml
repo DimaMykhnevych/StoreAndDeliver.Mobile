@@ -116,4 +116,6 @@
     <string name="empty_notes">Нотатки відсутні</string>
     <!--NOTES DIALOG -->
     <string name="close">Закрити</string>
+    <string name="complete">Завершити</string>
+    <string name="add_note">Додати нотатку</string>
 </resources>

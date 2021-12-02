@@ -115,5 +115,7 @@
     <string name="empty_notes">There are no notes</string>
     <!--NOTES DIALOG -->
     <string name="close">Close</string>
+    <string name="complete">Complete</string>
+    <string name="add_note">Add Note</string>
 
 </resources>
