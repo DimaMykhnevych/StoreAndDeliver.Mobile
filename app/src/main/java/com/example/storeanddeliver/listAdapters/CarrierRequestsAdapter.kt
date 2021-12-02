@@ -1,6 +1,5 @@
 package com.example.storeanddeliver.listAdapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,7 @@ import com.example.storeanddeliver.models.CargoRequest
 
 class CarrierRequestsAdapter(
     private val cargoRequests: HashMap<String, ArrayList<CargoRequest>>,
-    private val context: Context,
+    private val onCompleteRequests: (cargoRequests: HashMap<String, ArrayList<CargoRequest>>) -> Unit,
     private val fragmentManager: FragmentManager,
     private val fragmentActivity: FragmentActivity
 ) :
@@ -42,10 +41,23 @@ class CarrierRequestsAdapter(
         ) {
             holder.btnComplete.visibility = View.GONE
         }
+        holder.btnComplete.setOnClickListener {
+            onCompleteButtonClick(cargoRequests.filter { c -> c.key == keys[position] }
+                    as HashMap<String, ArrayList<CargoRequest>>)
+        }
     }
 
     override fun getItemCount(): Int {
         return cargoRequests.keys.size
+    }
+
+    private fun onCompleteButtonClick(cargoRequests: HashMap<String, ArrayList<CargoRequest>>) {
+        for(value in cargoRequests.values){
+            for(cr in value){
+                cr.status = RequestStatus.Completed.value
+            }
+        }
+        onCompleteRequests(cargoRequests)
     }
 
     private fun setupCarrierRequestsView(

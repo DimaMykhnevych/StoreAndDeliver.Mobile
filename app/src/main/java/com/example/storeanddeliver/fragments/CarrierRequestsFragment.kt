@@ -22,6 +22,8 @@ import com.example.storeanddeliver.listeners.RequestStatusSpinnerListener
 import com.example.storeanddeliver.managers.UserSettingsManager
 import com.example.storeanddeliver.models.CargoRequest
 import com.example.storeanddeliver.models.GetOptimizedRequestModel
+import com.example.storeanddeliver.models.UpdateCargoRequestModel
+import com.example.storeanddeliver.services.CargoRequestService
 import com.example.storeanddeliver.services.CargoSessionService
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.DeserializationFeature
@@ -36,6 +38,7 @@ class CarrierRequestsFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private var requestType: RequestType = RequestType.Deliver
     private var requestStatus: RequestStatus = RequestStatus.InProgress
     private var cargoSessionService = CargoSessionService()
+    private var cargoRequestService = CargoRequestService()
     private lateinit var carrierRequestsView: RecyclerView
     private lateinit var requestTypesSpinner: Spinner
     private lateinit var requestStatusSpinner: Spinner
@@ -126,15 +129,43 @@ class CarrierRequestsFragment : Fragment(), AdapterView.OnItemSelectedListener {
         )
         cargoGroup.clear()
         setupCarrierRequestsRecyclerView()
-        binding.carrierRequestsProgressBarCyclic.isVisible = true
-        binding.emptyCarrierRequestsText.visibility = View.GONE
+        activity?.runOnUiThread {
+            binding.carrierRequestsProgressBarCyclic.isVisible = true
+            binding.emptyCarrierRequestsText.visibility = View.GONE
+        }
         cargoSessionService.getCarrierRequests(getModel, onResponse)
     }
 
+    private val onCompleteRequests: (HashMap<String, ArrayList<CargoRequest>>) -> Unit =
+        { cargoRequests ->
+            activity?.runOnUiThread {
+                binding.carrierRequestsProgressBarCyclic.isVisible = true
+                binding.emptyCarrierRequestsText.visibility = View.GONE
+            }
+            val updateModel = UpdateCargoRequestModel(
+                requestGroup = cargoRequests,
+                units = UserSettingsManager.units,
+                language = UserSettingsManager.currentLanguage
+            )
+            cargoRequestService.updateRequestStatuses(updateModel, onCompleteRequestsResponse)
+        }
+
+    private val onCompleteRequestsResponse: (Call, Response) -> Unit = { _, _ ->
+        activity?.runOnUiThread {
+            binding.carrierRequestsProgressBarCyclic.isVisible = false
+        }
+        updateRequestsList()
+    }
+
     private fun setupCarrierRequestsRecyclerView() {
-        carrierRequestsView.apply {
-            layoutManager = LinearLayoutManager(activity)
-            adapter = CarrierRequestsAdapter(cargoGroup, context, fragmentManager!!, activity!!)
+        activity?.runOnUiThread {
+            carrierRequestsView.apply {
+                layoutManager = LinearLayoutManager(activity)
+                adapter = CarrierRequestsAdapter(
+                    cargoGroup,
+                    onCompleteRequests, fragmentManager!!, activity!!
+                )
+            }
         }
     }
 
