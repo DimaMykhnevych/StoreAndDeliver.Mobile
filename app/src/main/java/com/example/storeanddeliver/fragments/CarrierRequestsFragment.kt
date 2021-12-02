@@ -9,11 +9,15 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.storeanddeliver.R
 import com.example.storeanddeliver.databinding.FragmentCarrierRequestsBinding
 import com.example.storeanddeliver.dialogs.UnitsDialog
 import com.example.storeanddeliver.enums.RequestStatus
 import com.example.storeanddeliver.enums.RequestType
+import com.example.storeanddeliver.listAdapters.CarrierRequestsAdapter
+import com.example.storeanddeliver.listAdapters.RequestsAdapter
 import com.example.storeanddeliver.listeners.RequestStatusSpinnerListener
 import com.example.storeanddeliver.managers.UserSettingsManager
 import com.example.storeanddeliver.models.CargoRequest
@@ -32,6 +36,7 @@ class CarrierRequestsFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private var requestType: RequestType = RequestType.Deliver
     private var requestStatus: RequestStatus = RequestStatus.InProgress
     private var cargoSessionService = CargoSessionService()
+    private lateinit var carrierRequestsView: RecyclerView
     private lateinit var requestTypesSpinner: Spinner
     private lateinit var requestStatusSpinner: Spinner
 
@@ -52,6 +57,7 @@ class CarrierRequestsFragment : Fragment(), AdapterView.OnItemSelectedListener {
     ): View? {
         _binding = FragmentCarrierRequestsBinding.inflate(inflater, container, false)
         binding.carrierRequestsProgressBarCyclic.isVisible = true
+        carrierRequestsView = binding.carrierRequestsView
         requestTypesSpinner = binding.carrierRequestTypeSpinner
         requestStatusSpinner = binding.carrierRequestStatusSpinner
         binding.btnUnitsSettingsCarrier.setOnClickListener { onUnitSettingsButtonClick() }
@@ -74,7 +80,7 @@ class CarrierRequestsFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private fun updateView() {
         activity?.runOnUiThread {
             binding.carrierRequestsProgressBarCyclic.isVisible = false
-//            setupRequestsRecyclerView()
+            setupCarrierRequestsRecyclerView()
             if (cargoGroup.isEmpty()) {
                 binding.emptyCarrierRequestsText.visibility = View.VISIBLE
             } else {
@@ -119,10 +125,17 @@ class CarrierRequestsFragment : Fragment(), AdapterView.OnItemSelectedListener {
             status = requestStatus.value
         )
         cargoGroup.clear()
-//        setupRequestsRecyclerView()
+        setupCarrierRequestsRecyclerView()
         binding.carrierRequestsProgressBarCyclic.isVisible = true
         binding.emptyCarrierRequestsText.visibility = View.GONE
         cargoSessionService.getCarrierRequests(getModel, onResponse)
+    }
+
+    private fun setupCarrierRequestsRecyclerView() {
+        carrierRequestsView.apply {
+            layoutManager = LinearLayoutManager(activity)
+            adapter = CarrierRequestsAdapter(cargoGroup, context, fragmentManager!!, activity!!)
+        }
     }
 
     private fun configureRequestStatusSpinner() {
