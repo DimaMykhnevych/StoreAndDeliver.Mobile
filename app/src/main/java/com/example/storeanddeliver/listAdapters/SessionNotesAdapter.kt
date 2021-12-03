@@ -38,10 +38,17 @@ class SessionNotesAdapter(
     }
 
     private fun getDateInNeededFormat(date: Date): String {
+        val cal = Calendar.getInstance()
+        cal.time = date
+        cal.add(Calendar.HOUR, -2)
+        val dateInNeededFormat = cal.time
+
         var pattern = when (UserSettingsManager.currentLanguage) {
             "en" -> "MM/dd/yyyy HH:mm"
             else -> "dd/MM/yyyy HH:mm"
         }
-        return SimpleDateFormat(pattern, Locale(UserSettingsManager.currentLocale)).format(date)
+        return SimpleDateFormat(pattern, Locale(UserSettingsManager.currentLocale)).format(
+            dateInNeededFormat
+        )
     }
 }

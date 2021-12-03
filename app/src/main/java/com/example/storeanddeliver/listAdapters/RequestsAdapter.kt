@@ -7,12 +7,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.storeanddeliver.R
 import com.example.storeanddeliver.constants.Roles
+import com.example.storeanddeliver.dialogs.AddSessionNoteDialog
 import com.example.storeanddeliver.dialogs.SessionNotesDialog
 import com.example.storeanddeliver.enums.LengthUnit
 import com.example.storeanddeliver.enums.RequestStatus
@@ -20,6 +22,7 @@ import com.example.storeanddeliver.enums.RequestType
 import com.example.storeanddeliver.enums.WeightUnit
 import com.example.storeanddeliver.managers.CredentialsManager
 import com.example.storeanddeliver.managers.UserSettingsManager
+import com.example.storeanddeliver.models.AddCargoSessionNoteModel
 import com.example.storeanddeliver.models.Address
 import com.example.storeanddeliver.models.CargoRequest
 import com.example.storeanddeliver.models.CargoSessionNote
@@ -27,6 +30,7 @@ import com.example.storeanddeliver.services.CargoSessionNotesService
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.google.android.material.snackbar.Snackbar
 import okhttp3.Call
 import okhttp3.Response
 import org.w3c.dom.Text
@@ -42,6 +46,7 @@ class RequestsAdapter(
     RecyclerView.Adapter<RequestsAdapter.ViewHolder>() {
 
     private val cargoSessionNotesService = CargoSessionNotesService()
+    private var addNoteCargoRequestId: String = ""
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val requestDate: TextView = itemView.findViewById(R.id.request_date)
@@ -102,23 +107,51 @@ class RequestsAdapter(
         setupSettingsRecyclerView(holder, position)
         // BUTTONS
         holder.btnShowCargoInfo.setOnClickListener { onShowCargoInfoBtnClick(holder) }
-        if(cargoRequests[position].status != RequestStatus.Pending.value) {
+        if (cargoRequests[position].status != RequestStatus.Pending.value) {
             holder.btnShowCargoNotes.setOnClickListener {
                 onShowCargoNotesBtnClick(
                     holder,
                     cargoRequests[position].id
                 )
             }
-        } else{
+        } else {
             holder.btnShowCargoNotes.visibility = View.GONE
         }
-        if(CredentialsManager.role != Roles.Carrier) {
+        if (CredentialsManager.role != Roles.Carrier) {
             holder.btnAddCargoNote.visibility = View.GONE
+        }
+        holder.btnAddCargoNote.setOnClickListener {
+            onAddCargoNoteBtnClick(cargoRequests[position].id)
         }
     }
 
     override fun getItemCount(): Int {
         return cargoRequests.size
+    }
+
+    private fun onAddCargoNoteBtnClick(cargoRequestId: String) {
+        addNoteCargoRequestId = cargoRequestId
+        fragmentActivity.runOnUiThread {
+            var dialog = AddSessionNoteDialog(onAddSessionNoteDialogClosed)
+            dialog.show(fragmentManager, "add_session_note_dialog")
+        }
+    }
+
+    private val onAddSessionNoteDialogClosed: (String) -> Unit = {
+        val addNoteModel = AddCargoSessionNoteModel(
+            id = "5b4997f8-3206-462a-89b5-c990cfacfd67",
+            noteCreationDate = "2021-12-03T08:12:00.795Z",
+            content = it,
+            cargoRequestId = addNoteCargoRequestId
+        )
+        cargoSessionNotesService.addCargoSessionNote(addNoteModel, onAddCargoNoteResponse)
+    }
+
+    private val onAddCargoNoteResponse: (Call, Response) -> Unit = { _, _ ->
+        fragmentActivity.runOnUiThread {
+            Toast.makeText(context, context.getString(R.string.add_note_success), Toast.LENGTH_LONG)
+                .show()
+        }
     }
 
     private fun setupSettingsRecyclerView(holder: ViewHolder, position: Int) {
@@ -148,7 +181,7 @@ class RequestsAdapter(
     }
 
     private fun openNotesDialog(notes: MutableList<CargoSessionNote>) {
-        fragmentActivity.runOnUiThread{
+        fragmentActivity.runOnUiThread {
             var dialog = SessionNotesDialog(notes)
             dialog.show(fragmentManager, "session_notes_dialog")
         }
