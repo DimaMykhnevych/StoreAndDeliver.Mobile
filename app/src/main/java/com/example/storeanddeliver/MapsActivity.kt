@@ -2,7 +2,6 @@ package com.example.storeanddeliver
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -13,7 +12,6 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.example.storeanddeliver.databinding.ActivityMapsBinding
 import com.example.storeanddeliver.enums.RequestType
 import com.example.storeanddeliver.models.CargoRequest
-import com.example.storeanddeliver.models.Request
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
@@ -52,9 +50,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             mMap.addMarker(
                 MarkerOptions().position(storeAddressPoint).title(getString(R.string.store_address))
             )
-            mMap.run {
-
-            }
         } else {
             val toAddress = cargoRequest.request!!.toAddress!!
             val toAddressPoint = LatLng(toAddress.latitude, toAddress.longtitude)
@@ -62,6 +57,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 MarkerOptions().position(toAddressPoint).title(getString(R.string.to_address))
             )
         }
+
     }
 
     private fun parseCargoRequest(cargoRequest: String?): CargoRequest {
