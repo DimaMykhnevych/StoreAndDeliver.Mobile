@@ -23,4 +23,13 @@ object CredentialsManager {
         }
         authResponse?.token?.let { token = it }
     }
+
+    fun clearCredentials(){
+        userId = ""
+        userName = ""
+        role = ""
+        registryDate = Date()
+        email = ""
+        token = ""
+    }
 }

@@ -139,4 +139,5 @@
     <!--COMPANY ADMIN -->
     <string name="delete">Видалити</string>
     <string name="confirm_deletion">Ви впевненні, що бажаєте видалити %1$s?</string>
+    <string name="log_out">Вийти</string>
 </resources>

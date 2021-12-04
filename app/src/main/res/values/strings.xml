@@ -139,4 +139,5 @@
     <!--COMPANY ADMIN -->
     <string name="delete">Delete</string>
     <string name="confirm_deletion">Are you sure you want to delete %1$s?</string>
+    <string name="log_out">Log Out</string>
 </resources>
