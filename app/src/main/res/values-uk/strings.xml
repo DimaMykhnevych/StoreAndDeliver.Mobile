@@ -124,4 +124,14 @@
     <string name="carriers_management_menu_item">Перевізники</string>
     <string name="store_management_menu_item">Склади</string>
 
+    <!--COMPANY ADMIN -->
+    <string name="carrier_management"><b>Управлянні перевізниками</b></string>
+    <string name="empty_carriers">Перевізників не знайдено</string>
+    <string name="carrier_username"><b>Ім\'я:</b> %1$s</string>
+    <string name="carrier_email"><b>Електрона пошта:</b> %1$s</string>
+    <string name="company_name"><b>Назва компанії:</b> %1$s</string>
+    <string name="truck_volume"><b>Об\'єм вантажівки:</b> %1$s м^3</string>
+    <!--COMPANY ADMIN -->
+    <string name="delete">Видалити</string>
+    <string name="confirm_deletion">Ви впевненні, що бажаєте видалити %1$s?</string>
 </resources>

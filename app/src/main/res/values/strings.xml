@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">StoreAndDeliver</string>
     <string name="welcome">Welcome</string>
@@ -119,7 +120,18 @@
     <string name="add_note">Add Note</string>
     <string name="note">Note</string>
     <string name="add_note_success">Note was successfully added</string>
+
     <string name="carriers_management_menu_item">Carriers</string>
     <string name="store_management_menu_item">Stores</string>
 
+    <!--COMPANY ADMIN -->
+    <string name="carrier_management"><b>Carrier management</b></string>
+    <string name="empty_carriers">No carriers found</string>
+    <string name="carrier_username"><b>Username:</b> %1$s</string>
+    <string name="carrier_email"><b>Email:</b> %1$s</string>
+    <string name="company_name"><b>Company name:</b> %1$s</string>
+    <string name="truck_volume"><b>Truck volume:</b> %1$s m^3</string>
+    <!--COMPANY ADMIN -->
+    <string name="delete">Delete</string>
+    <string name="confirm_deletion">Are you sure you want to delete %1$s?</string>
 </resources>

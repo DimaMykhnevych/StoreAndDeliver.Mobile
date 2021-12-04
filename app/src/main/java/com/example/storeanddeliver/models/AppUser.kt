@@ -8,5 +8,5 @@ data class AppUser(
     var userName: String,
     var role: String,
     var email: String,
-    var registrationDate: String,
+    var registrationDate: String?,
 )
