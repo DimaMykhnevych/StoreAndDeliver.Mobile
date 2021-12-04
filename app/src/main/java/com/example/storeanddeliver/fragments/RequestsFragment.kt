@@ -1,5 +1,6 @@
 package com.example.storeanddeliver.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import android.widget.Spinner
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.storeanddeliver.MapsActivity
 import com.example.storeanddeliver.R
 import com.example.storeanddeliver.databinding.FragmentRequestsBinding
 import com.example.storeanddeliver.dialogs.UnitsDialog
@@ -43,6 +45,7 @@ class Requests : Fragment(), AdapterView.OnItemSelectedListener {
     private lateinit var requestsView: RecyclerView
     private lateinit var requestTypesSpinner: Spinner
     private lateinit var requestStatusSpinner: Spinner
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -138,7 +141,8 @@ class Requests : Fragment(), AdapterView.OnItemSelectedListener {
     private fun setupRequestsRecyclerView() {
         requestsView.apply {
             layoutManager = LinearLayoutManager(activity)
-            adapter = RequestsAdapter(requests, context, fragmentManager!!, activity!!)
+            adapter =
+                RequestsAdapter(requests, context, fragmentManager!!, activity!!, null)
         }
     }
 

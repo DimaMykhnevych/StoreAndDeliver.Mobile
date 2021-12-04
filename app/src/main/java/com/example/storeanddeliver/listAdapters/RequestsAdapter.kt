@@ -1,6 +1,7 @@
 package com.example.storeanddeliver.listAdapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,10 +9,12 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.storeanddeliver.MapsActivity
 import com.example.storeanddeliver.R
 import com.example.storeanddeliver.constants.Roles
 import com.example.storeanddeliver.dialogs.AddSessionNoteDialog
@@ -41,7 +44,8 @@ class RequestsAdapter(
     private val cargoRequests: MutableList<CargoRequest>,
     private val context: Context,
     private val fragmentManager: FragmentManager,
-    private val fragmentActivity: FragmentActivity
+    private val fragmentActivity: FragmentActivity,
+    private val onMapClickCallback: ((CargoRequest) -> Unit)?
 ) :
     RecyclerView.Adapter<RequestsAdapter.ViewHolder>() {
 
@@ -72,6 +76,7 @@ class RequestsAdapter(
         val securityMode: TextView = itemView.findViewById(R.id.security_mode)
         val cargoStoreInfo: LinearLayout = itemView.findViewById(R.id.cargo_store_info)
         val settingsView: RecyclerView = itemView.findViewById(R.id.settingsView)
+        val btnMap: Button = itemView.findViewById(R.id.btn_map)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -119,14 +124,20 @@ class RequestsAdapter(
         }
         if (CredentialsManager.role != Roles.Carrier) {
             holder.btnAddCargoNote.visibility = View.GONE
+            holder.btnMap.visibility = View.GONE
         }
         holder.btnAddCargoNote.setOnClickListener {
             onAddCargoNoteBtnClick(cargoRequests[position].id)
         }
+        holder.btnMap.setOnClickListener { onBtnMapClick(cargoRequests[position]) }
     }
 
     override fun getItemCount(): Int {
         return cargoRequests.size
+    }
+
+    private fun onBtnMapClick(cargoRequest: CargoRequest) {
+        onMapClickCallback?.let { it(cargoRequest) }
     }
 
     private fun onAddCargoNoteBtnClick(cargoRequestId: String) {

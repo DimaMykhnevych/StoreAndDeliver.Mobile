@@ -1,5 +1,6 @@
 package com.example.storeanddeliver
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.UserManager
@@ -12,20 +13,24 @@ import com.example.storeanddeliver.fragments.Requests
 import com.example.storeanddeliver.fragments.SettingsFragment
 import com.example.storeanddeliver.managers.CredentialsManager
 import com.example.storeanddeliver.managers.UserSettingsManager
+import com.example.storeanddeliver.models.CargoRequest
 import com.example.storeanddeliver.utils.ContextUtils
 import com.example.storeanddeliver.utils.ContextUtils.Companion.setLocale
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import java.util.*
 
 class HomeActivity : AppCompatActivity() {
     private val requestsFragment = Requests()
     private val indicatorsFragment = IndicatorsFragment()
     private val settingsFragment = SettingsFragment(null)
-    private val carrierRequestsFragment = CarrierRequestsFragment()
+    private lateinit var carrierRequestsFragment: CarrierRequestsFragment
     private var bottomNavigation: BottomNavigationView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        carrierRequestsFragment = CarrierRequestsFragment(onMapBtnClick)
         setLocale(resources, UserSettingsManager.currentLocale)
         setContentView(R.layout.activity_home)
         bottomNavigation = findViewById(R.id.bottom_navigation)
@@ -47,6 +52,12 @@ class HomeActivity : AppCompatActivity() {
             true
         }
 
+    }
+
+    private val onMapBtnClick: (CargoRequest) -> Unit = { cargoRequest ->
+        val intent = Intent(this@HomeActivity, MapsActivity::class.java)
+        intent.putExtra("cargoRequest", Json.encodeToString(cargoRequest))
+        startActivity(intent)
     }
 
     private fun replaceFragment(fragment: Fragment) {

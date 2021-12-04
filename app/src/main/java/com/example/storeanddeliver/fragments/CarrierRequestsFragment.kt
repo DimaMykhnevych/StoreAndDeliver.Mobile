@@ -1,5 +1,6 @@
 package com.example.storeanddeliver.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import android.widget.Spinner
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.storeanddeliver.MapsActivity
 import com.example.storeanddeliver.R
 import com.example.storeanddeliver.databinding.FragmentCarrierRequestsBinding
 import com.example.storeanddeliver.dialogs.UnitsDialog
@@ -31,7 +33,7 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import okhttp3.Call
 import okhttp3.Response
 
-class CarrierRequestsFragment : Fragment(), AdapterView.OnItemSelectedListener {
+class CarrierRequestsFragment(val onMapBtnClickCallback: (CargoRequest) -> Unit) : Fragment(), AdapterView.OnItemSelectedListener {
     private var cargoGroup: HashMap<String, ArrayList<CargoRequest>> = HashMap()
     private var _binding: FragmentCarrierRequestsBinding? = null
     private val binding get() = _binding!!
@@ -163,10 +165,17 @@ class CarrierRequestsFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 layoutManager = LinearLayoutManager(activity)
                 adapter = CarrierRequestsAdapter(
                     cargoGroup,
-                    onCompleteRequests, fragmentManager!!, activity!!
+                    onCompleteRequests, fragmentManager!!, activity!!,
+                    onMapBtnClick
                 )
             }
         }
+    }
+
+    private val onMapBtnClick: (CargoRequest) -> Unit = { cargoRequest ->
+//        val intent = Intent(activity, MapsActivity::class.java)
+//        startActivity(intent)
+        onMapBtnClickCallback(cargoRequest)
     }
 
     private fun configureRequestStatusSpinner() {

@@ -1,5 +1,6 @@
 package com.example.storeanddeliver.listAdapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.storeanddeliver.MapsActivity
 import com.example.storeanddeliver.R
 import com.example.storeanddeliver.enums.RequestStatus
 import com.example.storeanddeliver.models.CargoRequest
@@ -16,7 +18,8 @@ class CarrierRequestsAdapter(
     private val cargoRequests: HashMap<String, ArrayList<CargoRequest>>,
     private val onCompleteRequests: (cargoRequests: HashMap<String, ArrayList<CargoRequest>>) -> Unit,
     private val fragmentManager: FragmentManager,
-    private val fragmentActivity: FragmentActivity
+    private val fragmentActivity: FragmentActivity,
+    private val onMapBtnClick: (CargoRequest) -> Unit
 ) :
     RecyclerView.Adapter<CarrierRequestsAdapter.ViewHolder>() {
 
@@ -70,7 +73,8 @@ class CarrierRequestsAdapter(
                 cargoRequests,
                 context,
                 fragmentManager,
-                fragmentActivity
+                fragmentActivity,
+                onMapBtnClick
             )
         }
     }

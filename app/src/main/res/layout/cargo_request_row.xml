@@ -20,6 +20,18 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Request from 11/12/2021" />
 
+    <Button
+        android:id="@+id/btn_map"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/ic_map_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.634"
+        app:layout_constraintLeft_toRightOf="@id/from_address_header"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.234" />
+
     <TextView
         android:id="@+id/deliver_cargo_by"
         android:layout_width="wrap_content"
