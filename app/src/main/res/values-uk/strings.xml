@@ -131,6 +131,11 @@
     <string name="carrier_email"><b>Електрона пошта:</b> %1$s</string>
     <string name="company_name"><b>Назва компанії:</b> %1$s</string>
     <string name="truck_volume"><b>Об\'єм вантажівки:</b> %1$s м^3</string>
+
+    <string name="store_management"><b>Управління складськими приміщеннями</b></string>
+    <string name="empty_stores">Складських приміщень не знайдено</string>
+    <string name="store_name"><b>Назва складу:</b> %1$s</string>
+    <string name="store_volume"><b>Об\'єм складу:</b> %1$s м^3</string>
     <!--COMPANY ADMIN -->
     <string name="delete">Видалити</string>
     <string name="confirm_deletion">Ви впевненні, що бажаєте видалити %1$s?</string>

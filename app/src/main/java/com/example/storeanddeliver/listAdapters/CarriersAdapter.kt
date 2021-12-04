@@ -8,16 +8,13 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.storeanddeliver.R
-import com.example.storeanddeliver.dialogs.ConfirmDeletionDialog
 import com.example.storeanddeliver.models.Carrier
-import com.example.storeanddeliver.services.CarrierService
 
 class CarriersAdapter(
     private val carriers: MutableList<Carrier>,
     private val context: Context,
     private val onCarrierDelete: (Carrier) -> Unit
 ) : RecyclerView.Adapter<CarriersAdapter.ViewHolder>() {
-    val carrierService = CarrierService()
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val carrierUsername: TextView = itemView.findViewById(R.id.carrier_username)
@@ -45,7 +42,6 @@ class CarriersAdapter(
         holder.truckVolume.text =
             context.getString(R.string.truck_volume, "%.2f".format(currentCarrier.maxCargoVolume))
         holder.deleteBtn.setOnClickListener { onCarrierDelete(currentCarrier) }
-
     }
 
     override fun getItemCount(): Int {

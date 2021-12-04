@@ -47,7 +47,7 @@ class CarriersManagementFragment : Fragment() {
         _binding = null
     }
 
-    private fun setupIndicatorsRecyclerView() {
+    private fun setupCarriersRecyclerView() {
         activity?.runOnUiThread {
             carriersView.apply {
                 layoutManager = LinearLayoutManager(activity)
@@ -71,7 +71,7 @@ class CarriersManagementFragment : Fragment() {
 
     private val onDeleteCarrierResponse: (Call, Response) -> Unit = { _, _ ->
         carriers.clear()
-        setupIndicatorsRecyclerView()
+        setupCarriersRecyclerView()
         activity?.runOnUiThread {
             binding.carriersProgressBarIndicators.isVisible = true
             binding.emptyCarriersText.visibility = View.GONE
@@ -97,7 +97,7 @@ class CarriersManagementFragment : Fragment() {
     private fun updateView() {
         activity?.runOnUiThread {
             binding.carriersProgressBarIndicators.isVisible = false
-            setupIndicatorsRecyclerView()
+            setupCarriersRecyclerView()
             if (carriers.size == 0) {
                 binding.emptyCarriersText.visibility = View.VISIBLE
             } else {

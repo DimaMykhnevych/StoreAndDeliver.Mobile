@@ -131,6 +131,11 @@
     <string name="carrier_email"><b>Email:</b> %1$s</string>
     <string name="company_name"><b>Company name:</b> %1$s</string>
     <string name="truck_volume"><b>Truck volume:</b> %1$s m^3</string>
+
+    <string name="store_management"><b>Store management</b></string>
+    <string name="empty_stores">No stores found</string>
+    <string name="store_name"><b>Store name:</b> %1$s</string>
+    <string name="store_volume"><b>Store volume:</b> %1$s m^3</string>
     <!--COMPANY ADMIN -->
     <string name="delete">Delete</string>
     <string name="confirm_deletion">Are you sure you want to delete %1$s?</string>
