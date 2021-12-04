@@ -119,5 +119,7 @@
     <string name="add_note">Add Note</string>
     <string name="note">Note</string>
     <string name="add_note_success">Note was successfully added</string>
+    <string name="carriers_management_menu_item">Carriers</string>
+    <string name="store_management_menu_item">Stores</string>
 
 </resources>

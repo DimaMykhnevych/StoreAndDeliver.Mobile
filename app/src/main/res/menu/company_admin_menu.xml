@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/ic_carriers_management"
+        android:icon="@drawable/ic_baseline_supervised_user_circle_24"
+        android:title="@string/carriers_management_menu_item" />
+
+    <item
+        android:id="@+id/ic_store_management"
+        android:icon="@drawable/ic_baseline_storage_24"
+        android:title="@string/store_management_menu_item" />
+
+    <item
+        android:id="@+id/ic_company_admin_settings"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/settings" />
+</menu>

@@ -120,4 +120,8 @@
     <string name="add_note">Додати нотатку</string>
     <string name="note">Нотатка</string>
     <string name="add_note_success">Нотатка була успішно додана</string>
+
+    <string name="carriers_management_menu_item">Перевізники</string>
+    <string name="store_management_menu_item">Склади</string>
+
 </resources>
