@@ -48,7 +48,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             val storeAddress = cargoRequest.store!!.address!!
             val storeAddressPoint = LatLng(storeAddress.latitude, storeAddress.longtitude)
             mMap.addMarker(
-                MarkerOptions().position(storeAddressPoint).title(getString(R.string.store_address))
+                MarkerOptions().position(storeAddressPoint)
+                    .title(getString(R.string.store_address_pointer))
             )
         } else {
             val toAddress = cargoRequest.request!!.toAddress!!

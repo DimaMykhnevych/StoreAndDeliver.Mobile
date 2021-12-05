@@ -85,6 +85,7 @@
     <string name="cargo_height">Height: %1$s</string>
     <string name="cargo_width">Width: %1$s</string>
     <string name="store_address">Store Address: %1$s</string>
+    <string name="store_address_pointer">Store Address</string>
     <string name="security_mode">Security Mode: %1$s</string>
     <string name="enabled">Enabled</string>
     <string name="disabled">Disabled</string>

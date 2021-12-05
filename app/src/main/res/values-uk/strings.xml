@@ -85,6 +85,7 @@
     <string name="cargo_height">Висота: %1$s</string>
     <string name="cargo_width">Ширина: %1$s</string>
     <string name="store_address">Адреса складу: %1$s</string>
+    <string name="store_address_pointer">Адреса складу</string>
     <string name="security_mode">Додаткова охорона: %1$s</string>
     <string name="enabled">Включено</string>
     <string name="disabled">Не включено</string>
