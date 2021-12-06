@@ -1,4 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">StoreAndDeliver</string>
+    <string name="welcome">Добрый день</string>
+    <string name="please_enter_your_credentials">Введите пароль и имя</string>
+    <string name="username">Имя пользователя</string>
+    <string name="password">Пароль</string>
+    <string name="log_in">Войти</string>
+    <string name="username_required">Имя обязательное</string>
+    <string name="password_required">Пароль обязательный</string>
+    <string name="success_login">Вы успешно авторизовались</string>
+    <string name="invalid_creds">Имя и пароль неверны</string>
+    <string name="email_confirmation_required">Подтвердите свою электронную почту</string>
+    <string name="requests_menu_item">Заявки</string>
+    <string name="cargo_indicators_menu_item">Показатели</string>
     <string name="request_from">Заявка от %1$s</string>
+    <string name="deliver_by">Доставить груз до %1$s</string>
+    <string name="store_cargo_from">Хранить груз с %1$s</string>
+    <string name="store_cargo_to">Хранить груз до %1$s</string>
+    <string name="address_format">%1$s, %2$s, %3$s</string>
+    <string name="total_price">Общая цена: %1$s</string>
+    <string-array name="request_type_array">
+        <item>Доставка</item>
+        <item>Хранение</item>
+    </string-array>
+    <string-array name="request_status_array">
+        <item>На рассмотрении</item>
+        <item>Обрабатывается</item>
+        <item>Выполнено</item>
+    </string-array>
+    <string-array name="carrier_request_status_array">
+        <item>Обрабатывается</item>
+        <item>Выполнено</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="request_type">Тип заявки:</string>
+    <string name="from_address">Перевезти с</string>
+    <string name="to_address">Адрес доставки</string>
+    <string name="cargo">Груз</string>
+    <string name="show_cargo_info">Груз</string>
+    <string name="hide_cargo_info">Скрыть</string>
+    <string name="show_cargo_notes">Показать заметки</string>
+    <!--STATUSES-->
+    <string name="status_pending">На рассмотрении</string>
+    <string name="status_active">Обрабатывается</string>
+    <string name="status_completed">Выполнено</string>
+    <!--STATUSES-->
+    <!--UNITS-->
+    <string name="kg">кг</string>
+    <string name="pounds">lb</string>
+    <string name="metres">м</string>
+    <string name="yards">yd</string>
+    <string name="celsius">°C</string>
+    <string name="kelvin">K</string>
+    <string name="fahrenheit">°F</string>
+    <string name="percentage">%</string>
+    <string name="lux">lx</string>
+    <string-array name="weight_units_array">
+        <item>Килограммы</item>
+        <item>Фунты</item>
+    </string-array>
+    <string-array name="length_units_array">
+        <item>Метры</item>
+        <item>Ярды</item>
+    </string-array>
+    <string-array name="temperature_units_array">
+        <item>Цельсий</item>
+        <item>Фаренгейт</item>
+        <item>Кельвин</item>
+    </string-array>
+    <string-array name="humidity_units_array">
+        <item>Проценты</item>
+    </string-array>
+    <string-array name="luminosity_units_array">
+        <item>Люкс</item>
+    </string-array>
+    <!--UNITS-->
+    <!--CARGO INFO-->
+    <string name="cargo_description">Описание: %1$s</string>
+    <string name="cargo_status">Статус: %1$s</string>
+    <string name="cargo_amount">Количество: %1$d</string>
+    <string name="cargo_weight">Вес: %1$s</string>
+    <string name="cargo_length">Длина: %1$s</string>
+    <string name="cargo_height">Высота: %1$s</string>
+    <string name="cargo_width">Ширина: %1$s</string>
+    <string name="store_address">Адрес склада: %1$s</string>
+    <string name="store_address_pointer">Адрес склада</string>
+    <string name="security_mode">Дополнительная охрана: %1$s</string>
+    <string name="enabled">Включено</string>
+    <string name="disabled">Не включено</string>
+    <string name="settings">Настройки</string>
+    <!--CARGO INFO-->
+    <string name="request_status">Статус заявки: </string>
+    <string name="empty_requests">Заявок с таким статусом не найдено</string>
+    <string name="apply_units">Применть</string>
+    <string name="cancel">Отменить</string>
+    <!--UNITS PANEL -->
+    <string name="unit_settings">Настройка единиц измерения</string>
+    <string name="length_unit">Длина:</string>
+    <string name="weight_unit">Вес:</string>
+    <string name="temperature_unit">Температура:</string>
+    <string name="humidity_unit">Влажность:</string>
+    <string name="luminosity_unit">Освещенность:</string>
+    <!--UNITS PANEL -->
+    <string name="choose_language">Выбрать язык:</string>
+    <string name="cargo_indicators">Показатели грузов</string>
+    <string name="empty_indicators">На текущий момент не найдено ни одного показателя</string>
+    <!--CARGO INDICATORS -->
+    <string name="cargo_indicators_header">Груз: %1$s</string>
+    <string name="configured_settings"><u>Сконфигурированные настройки</u></string>
+    <string name="cargo_snapshots"><u>Текущие показатели</u></string>
+    <!--CARGO INDICATORS -->
+
+    <!--NOTES DIALOG -->
+    <string name="notes">Заметки</string>
+    <string name="empty_notes">Заметки отсутствуют</string>
+    <!--NOTES DIALOG -->
+    <string name="close">Закрыть</string>
+    <string name="complete">Завершить</string>
+    <string name="add_note">Добавить заметку</string>
+    <string name="note">Заметка</string>
+    <string name="add_note_success">Заметка была успешно добавлена</string>
+
+    <string name="carriers_management_menu_item">Перевозчики</string>
+    <string name="store_management_menu_item">Склады</string>
+
+    <!--COMPANY ADMIN -->
+    <string name="carrier_management"><b>Упревление перевозчиками</b></string>
+    <string name="empty_carriers">Перевозчики не найдены</string>
+    <string name="carrier_username"><b>Имя:</b> %1$s</string>
+    <string name="carrier_email"><b>Электронная почта:</b> %1$s</string>
+    <string name="company_name"><b>Название компании:</b> %1$s</string>
+    <string name="truck_volume"><b>Объем грузовика:</b> %1$s м^3</string>
+
+    <string name="store_management"><b>Управление складскими помещениями</b></string>
+    <string name="empty_stores">Складские помещения не найдены</string>
+    <string name="store_name"><b>Название склада:</b> %1$s</string>
+    <string name="store_volume"><b>Объем склада:</b> %1$s м^3</string>
+    <!--COMPANY ADMIN -->
+    <string name="delete">Удалить</string>
+    <string name="confirm_deletion">Вы уверены, что хотите удалить %1$s?</string>
+    <string name="log_out">Выйти</string>
 </resources>
