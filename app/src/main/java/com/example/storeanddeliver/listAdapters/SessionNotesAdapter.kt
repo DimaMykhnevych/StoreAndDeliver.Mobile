@@ -40,7 +40,7 @@ class SessionNotesAdapter(
     private fun getDateInNeededFormat(date: Date): String {
         val cal = Calendar.getInstance()
         cal.time = date
-        cal.add(Calendar.HOUR, -2)
+//        cal.add(Calendar.HOUR, -2)
         val dateInNeededFormat = cal.time
 
         var pattern = when (UserSettingsManager.currentLanguage) {
