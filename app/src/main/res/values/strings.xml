@@ -141,4 +141,13 @@
     <string name="delete">Delete</string>
     <string name="confirm_deletion">Are you sure you want to delete %1$s?</string>
     <string name="log_out">Log Out</string>
+
+    <!-- UPLOAD PHOTO -->
+    <string name="select_image">Select Image</string>
+    <string name="save">Save</string>
+    <string name="upload_photo">Upload Photo</string>
+    <string name="upload_success">File uploaded successfully</string>
+    <string name="upload_failed">File uploading failed</string>
+    <string name="uploading_file">Uploading file…</string>
+    <!-- UPLOAD PHOTO -->
 </resources>

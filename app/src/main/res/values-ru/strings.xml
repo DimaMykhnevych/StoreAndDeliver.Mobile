@@ -141,4 +141,13 @@
     <string name="delete">Удалить</string>
     <string name="confirm_deletion">Вы уверены, что хотите удалить %1$s?</string>
     <string name="log_out">Выйти</string>
+
+    <!-- UPLOAD PHOTO -->
+    <string name="select_image">Выбрать фото</string>
+    <string name="save">Сохранить</string>
+    <string name="upload_photo">Загрузка фото</string>
+    <string name="upload_success">Файл загружен успешно</string>
+    <string name="upload_failed">Не удалось загрузить файл</string>
+    <string name="uploading_file">Загружаем файл…</string>
+    <!-- UPLOAD PHOTO -->
 </resources>

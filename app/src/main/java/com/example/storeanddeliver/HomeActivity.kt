@@ -7,6 +7,7 @@ import android.os.UserManager
 import android.view.View
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
+import com.example.storeanddeliver.constants.Constants
 import com.example.storeanddeliver.constants.Roles
 import com.example.storeanddeliver.fragments.*
 import com.example.storeanddeliver.managers.CredentialsManager
@@ -31,7 +32,7 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        carrierRequestsFragment = CarrierRequestsFragment(onMapBtnClick)
+        carrierRequestsFragment = CarrierRequestsFragment(onMapBtnClick, onAddPhotoClick)
         setLocale(resources, UserSettingsManager.currentLocale)
         setContentView(R.layout.activity_home)
         bottomNavigation = findViewById(R.id.bottom_navigation)
@@ -88,6 +89,12 @@ class HomeActivity : AppCompatActivity() {
     private val onMapBtnClick: (CargoRequest) -> Unit = { cargoRequest ->
         val intent = Intent(this@HomeActivity, MapsActivity::class.java)
         intent.putExtra("cargoRequest", Json.encodeToString(cargoRequest))
+        startActivity(intent)
+    }
+
+    private val onAddPhotoClick: (String) -> Unit = { cargoRequestId ->
+        val intent = Intent(this@HomeActivity, UploadPhotoActivity::class.java)
+        intent.putExtra(Constants.cargoRequestIdKey, cargoRequestId)
         startActivity(intent)
     }
 

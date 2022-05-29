@@ -142,7 +142,7 @@ class Requests : Fragment(), AdapterView.OnItemSelectedListener {
         requestsView.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter =
-                RequestsAdapter(requests, context, fragmentManager!!, activity!!, null)
+                RequestsAdapter(requests, context, fragmentManager!!, activity!!, null, null)
         }
     }
 

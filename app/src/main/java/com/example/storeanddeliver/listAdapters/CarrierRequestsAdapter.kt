@@ -19,7 +19,8 @@ class CarrierRequestsAdapter(
     private val onCompleteRequests: (cargoRequests: HashMap<String, ArrayList<CargoRequest>>) -> Unit,
     private val fragmentManager: FragmentManager,
     private val fragmentActivity: FragmentActivity,
-    private val onMapBtnClick: (CargoRequest) -> Unit
+    private val onMapBtnClick: (CargoRequest) -> Unit,
+    private val onAddPhotoBtnClick: (String) -> Unit
 ) :
     RecyclerView.Adapter<CarrierRequestsAdapter.ViewHolder>() {
 
@@ -55,8 +56,8 @@ class CarrierRequestsAdapter(
     }
 
     private fun onCompleteButtonClick(cargoRequests: HashMap<String, ArrayList<CargoRequest>>) {
-        for(value in cargoRequests.values){
-            for(cr in value){
+        for (value in cargoRequests.values) {
+            for (cr in value) {
                 cr.status = RequestStatus.Completed.value
             }
         }
@@ -74,7 +75,8 @@ class CarrierRequestsAdapter(
                 context,
                 fragmentManager,
                 fragmentActivity,
-                onMapBtnClick
+                onMapBtnClick,
+                onAddPhotoBtnClick
             )
         }
     }

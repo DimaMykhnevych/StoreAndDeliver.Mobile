@@ -99,4 +99,13 @@
     <string name="luminosity_unit">Освітленність:</string>
     <!--UNITS PANEL -->
     <string name="choose_language">Обрати мову:</string>
+
+    <!-- UPLOAD PHOTO -->
+    <string name="select_image">Обрати фото</string>
+    <string name="save">Зберегти</string>
+    <string name="upload_photo">Завантаження фото</string>
+    <string name="upload_success">Файл завантажено успішно</string>
+    <string name="upload_failed">Файл не завантажено</string>
+    <string name="uploading_file">Завантажуємо файл…</string>
+    <!-- UPLOAD PHOTO -->
 </resources>

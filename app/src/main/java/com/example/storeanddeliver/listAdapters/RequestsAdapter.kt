@@ -45,7 +45,8 @@ class RequestsAdapter(
     private val context: Context,
     private val fragmentManager: FragmentManager,
     private val fragmentActivity: FragmentActivity,
-    private val onMapClickCallback: ((CargoRequest) -> Unit)?
+    private val onMapClickCallback: ((CargoRequest) -> Unit)?,
+    private val onUploadPhotoClickCallback: ((String) -> Unit)?
 ) :
     RecyclerView.Adapter<RequestsAdapter.ViewHolder>() {
 
@@ -77,6 +78,7 @@ class RequestsAdapter(
         val cargoStoreInfo: LinearLayout = itemView.findViewById(R.id.cargo_store_info)
         val settingsView: RecyclerView = itemView.findViewById(R.id.settingsView)
         val btnMap: Button = itemView.findViewById(R.id.btn_map)
+        val btnAddPhoto: Button = itemView.findViewById(R.id.btn_add_photo);
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -122,14 +124,17 @@ class RequestsAdapter(
         } else {
             holder.btnShowCargoNotes.visibility = View.GONE
         }
+
         if (CredentialsManager.role != Roles.Carrier) {
             holder.btnAddCargoNote.visibility = View.GONE
             holder.btnMap.visibility = View.GONE
+            holder.btnAddPhoto.visibility = View.GONE
         }
         holder.btnAddCargoNote.setOnClickListener {
             onAddCargoNoteBtnClick(cargoRequests[position].id)
         }
         holder.btnMap.setOnClickListener { onBtnMapClick(cargoRequests[position]) }
+        holder.btnAddPhoto.setOnClickListener { onBtnAddPhotoClick(cargoRequests[position].id) }
     }
 
     override fun getItemCount(): Int {
@@ -138,6 +143,10 @@ class RequestsAdapter(
 
     private fun onBtnMapClick(cargoRequest: CargoRequest) {
         onMapClickCallback?.let { it(cargoRequest) }
+    }
+
+    private fun onBtnAddPhotoClick(cargoRequestId: String) {
+        onUploadPhotoClickCallback?.let { it(cargoRequestId) }
     }
 
     private fun onAddCargoNoteBtnClick(cargoRequestId: String) {

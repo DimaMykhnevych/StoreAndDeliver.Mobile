@@ -33,7 +33,10 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import okhttp3.Call
 import okhttp3.Response
 
-class CarrierRequestsFragment(val onMapBtnClickCallback: (CargoRequest) -> Unit) : Fragment(), AdapterView.OnItemSelectedListener {
+class CarrierRequestsFragment(
+    val onMapBtnClickCallback: (CargoRequest) -> Unit,
+    val onUploadPhotoClickCallback: (String) -> Unit
+) : Fragment(), AdapterView.OnItemSelectedListener {
     private var cargoGroup: HashMap<String, ArrayList<CargoRequest>> = HashMap()
     private var _binding: FragmentCarrierRequestsBinding? = null
     private val binding get() = _binding!!
@@ -166,7 +169,8 @@ class CarrierRequestsFragment(val onMapBtnClickCallback: (CargoRequest) -> Unit)
                 adapter = CarrierRequestsAdapter(
                     cargoGroup,
                     onCompleteRequests, fragmentManager!!, activity!!,
-                    onMapBtnClick
+                    onMapBtnClick,
+                    onAddPhotoClickCallback
                 )
             }
         }
@@ -176,6 +180,10 @@ class CarrierRequestsFragment(val onMapBtnClickCallback: (CargoRequest) -> Unit)
 //        val intent = Intent(activity, MapsActivity::class.java)
 //        startActivity(intent)
         onMapBtnClickCallback(cargoRequest)
+    }
+
+    private val onAddPhotoClickCallback: (String) -> Unit = { cargoRequestId ->
+        onUploadPhotoClickCallback(cargoRequestId)
     }
 
     private fun configureRequestStatusSpinner() {
