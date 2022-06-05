@@ -26,6 +26,7 @@ class HomeActivity : AppCompatActivity() {
     private val settingsFragment = SettingsFragment(null)
     private val carriersManagementFragment = CarriersManagementFragment()
     private val storeManagementFragment = StoreManagementFragment()
+    private val feedbackFragment = FeedbackFragment()
     private lateinit var carrierRequestsFragment: CarrierRequestsFragment
     private var bottomNavigation: BottomNavigationView? = null
     private var companyAdminBottomNavigation: BottomNavigationView? = null
@@ -47,6 +48,7 @@ class HomeActivity : AppCompatActivity() {
                 R.id.ic_settings -> replaceFragment(settingsFragment)
                 R.id.ic_carriers_management -> replaceFragment(carrierRequestsFragment)
                 R.id.ic_company_admin_settings -> replaceFragment(settingsFragment)
+                R.id.ic_feedback -> replaceFragment(feedbackFragment)
             }
             true
         }
@@ -56,6 +58,7 @@ class HomeActivity : AppCompatActivity() {
                 R.id.ic_carriers_management -> replaceFragment(carriersManagementFragment)
                 R.id.ic_company_admin_settings -> replaceFragment(settingsFragment)
                 R.id.ic_store_management -> replaceFragment(storeManagementFragment)
+                R.id.ic_feedback -> replaceFragment(feedbackFragment)
             }
             true
         }
@@ -72,6 +75,7 @@ class HomeActivity : AppCompatActivity() {
                 Roles.Carrier -> {
                     bottomNavigation?.menu?.removeItem(R.id.ic_indicators)
                     bottomNavigation?.menu?.removeItem(R.id.ic_cargo)
+                    bottomNavigation?.menu?.removeItem(R.id.ic_feedback)
                     companyAdminBottomNavigation?.visibility = View.GONE
                     bottomNavigation?.visibility = View.VISIBLE
                     replaceFragment(carrierRequestsFragment)

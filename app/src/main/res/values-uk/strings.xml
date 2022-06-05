@@ -150,5 +150,11 @@
     <string name="upload_failed">Файл не завантажено</string>
     <string name="uploading_file">Завантажуємо файл…</string>
     <!-- UPLOAD PHOTO -->
-
+    <string name="feedback">Відгук</string>
+    <string name="leave_your_feedback">Залиште ваш відгук</string>
+    <string name="feedbacks">Відгуки</string>
+    <string name="rating">Рейтинг: </string>
+    <string name="send">Відправити</string>
+    <string name="feedback_validation_message">Це поле обов\'язкове</string>
+    <string name="empty_feedback_message">Відгуки не знайдені</string>
 </resources>

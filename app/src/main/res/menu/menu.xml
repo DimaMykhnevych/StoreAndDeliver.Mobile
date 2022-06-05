@@ -16,6 +16,11 @@
         android:title="@string/cargo_indicators_menu_item" />
 
     <item
+        android:id="@+id/ic_feedback"
+        android:icon="@drawable/ic_feedback"
+        android:title="@string/feedback" />
+
+    <item
         android:id="@+id/ic_settings"
         android:icon="@drawable/ic_settings"
         android:title="@string/settings" />

@@ -11,6 +11,11 @@
         android:title="@string/store_management_menu_item" />
 
     <item
+        android:id="@+id/ic_feedback"
+        android:icon="@drawable/ic_feedback"
+        android:title="@string/feedback" />
+
+    <item
         android:id="@+id/ic_company_admin_settings"
         android:icon="@drawable/ic_settings"
         android:title="@string/settings" />

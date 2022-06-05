@@ -150,4 +150,11 @@
     <string name="upload_failed">Не удалось загрузить файл</string>
     <string name="uploading_file">Загружаем файл…</string>
     <!-- UPLOAD PHOTO -->
+    <string name="feedback">Отзыв</string>
+    <string name="leave_your_feedback">Оставьте Ваш отзыв</string>
+    <string name="feedbacks">Отзывы</string>
+    <string name="rating">Рейтинг: </string>
+    <string name="send">Отправить</string>
+    <string name="feedback_validation_message">Это поле обязательно</string>
+    <string name="empty_feedback_message">Отзывы не найдены</string>
 </resources>

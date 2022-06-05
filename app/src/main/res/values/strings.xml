@@ -150,4 +150,12 @@
     <string name="upload_failed">File uploading failed</string>
     <string name="uploading_file">Uploading file…</string>
     <!-- UPLOAD PHOTO -->
+
+    <string name="feedback">Feedback</string>
+    <string name="leave_your_feedback">Leave your feedback</string>
+    <string name="feedbacks">Feedback</string>
+    <string name="rating">Rating: </string>
+    <string name="send">Send</string>
+    <string name="feedback_validation_message">This field is required</string>
+    <string name="empty_feedback_message">No feedback found</string>
 </resources>
