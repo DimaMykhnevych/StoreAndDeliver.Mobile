@@ -157,4 +157,6 @@
     <string name="send">Отправить</string>
     <string name="feedback_validation_message">Это поле обязательно</string>
     <string name="empty_feedback_message">Отзывы не найдены</string>
+    <string name="average_rating">Срейдний рейтинг:</string>
+    <string name="feedback_amount">Количество отзывов:</string>
 </resources>

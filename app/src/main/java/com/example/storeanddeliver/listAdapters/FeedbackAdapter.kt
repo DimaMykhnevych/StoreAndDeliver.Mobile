@@ -13,7 +13,6 @@ import com.example.storeanddeliver.managers.UserSettingsManager
 import com.example.storeanddeliver.models.Feedback
 import java.text.SimpleDateFormat
 import java.util.*
-import android.view.MotionEvent
 import android.view.View.OnTouchListener
 
 

@@ -1,5 +1,6 @@
 package com.example.storeanddeliver.fragments
 
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import com.example.storeanddeliver.databinding.FragmentFeedbackBinding
 import com.example.storeanddeliver.managers.CredentialsManager
 
 import android.widget.EditText
+import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,11 +25,12 @@ import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import okhttp3.Call
 import okhttp3.Response
+import kotlin.math.roundToInt
 
 
 class FeedbackFragment : Fragment() {
     private val defaultRating = 2.5F
-    private var feedbackList:MutableList<Feedback> = mutableListOf()
+    private var feedbackList: MutableList<Feedback> = mutableListOf()
     private var _binding: FragmentFeedbackBinding? = null
     private val binding get() = _binding!!
     private var feedbackService = FeedbackService()
@@ -98,6 +101,8 @@ class FeedbackFragment : Fragment() {
             } else {
                 binding.emptyFeedbackText.visibility = View.GONE
             }
+            binding.averageRatingTv.text = getAverageRating().toString()
+            binding.feedbackAmountTv.text = feedbackList.size.toString()
         }
     }
 
@@ -123,6 +128,7 @@ class FeedbackFragment : Fragment() {
         when (CredentialsManager.role) {
             Roles.User -> {
                 binding.feedbackHeaderAdmin.visibility = View.GONE
+                binding.statisticsPanel.visibility = View.GONE
             }
             Roles.CompanyAdmin -> {
                 binding.feedbackHeaderUser.visibility = View.GONE
@@ -132,8 +138,8 @@ class FeedbackFragment : Fragment() {
         binding.rBar.rating = defaultRating
     }
 
-    private fun getFeedback(){
-        when (CredentialsManager.role){
+    private fun getFeedback() {
+        when (CredentialsManager.role) {
             Roles.User -> {
                 feedbackService.getUserFeedback(onGetFeedbackResponse)
             }
@@ -141,5 +147,14 @@ class FeedbackFragment : Fragment() {
                 feedbackService.getFeedbackWithUser(onGetFeedbackResponse)
             }
         }
+    }
+
+    private fun getAverageRating(): Float {
+        var sum = 0F
+        for (i in feedbackList) {
+            sum += i.rating
+        }
+        var result =  if (feedbackList.isNotEmpty()) sum / feedbackList.size else 0F
+        return (result * 10.0F).roundToInt() / 10.0F
     }
 }

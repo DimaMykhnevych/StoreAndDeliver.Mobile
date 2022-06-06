@@ -157,4 +157,6 @@
     <string name="send">Відправити</string>
     <string name="feedback_validation_message">Це поле обов\'язкове</string>
     <string name="empty_feedback_message">Відгуки не знайдені</string>
+    <string name="average_rating">Середній рейтинг:</string>
+    <string name="feedback_amount">Кількість відгуків:</string>
 </resources>
