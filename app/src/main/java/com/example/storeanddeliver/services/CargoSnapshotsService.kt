@@ -14,7 +14,7 @@ class CargoSnapshotsService : BaseHttpService() {
     ) {
         val builder = Builder()
         builder.scheme(Constants.scheme)
-            .authority(Constants.authority)
+            .encodedAuthority(Constants.authority)
             .appendPath(Constants.base)
             .appendPath("CargoSnapshot")
             .appendPath("getUserCargoSnapshots")

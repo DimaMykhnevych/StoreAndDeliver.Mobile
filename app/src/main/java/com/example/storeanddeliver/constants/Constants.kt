@@ -10,4 +10,6 @@ object Constants {
     const val scheme: String = "https"
     const val authority: String = "storeanddeliver.azurewebsites.net"
     const val base: String = "api"
+
+    const val cargoRequestIdKey: String = "cargoRequestId"
 }
